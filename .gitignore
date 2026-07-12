@@ -38,3 +38,9 @@ Thumbs.db
 # local tooling (not part of submission)
 dev_config/
 risk_report*.pdf
+
+# ---- Generated / local (rebuilt on run) ----
+data/sbom.db
+
+# ---- Not for this repo ----
+submission/

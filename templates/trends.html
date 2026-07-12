@@ -1,47 +1,66 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Risk Trends</title>
-  <script src="{{ url_for('static', filename='chart.min.js') }}"></script>
-  <style>
-    body { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; background: #f3f5f4; color: #17211f; margin: 0; padding: 2rem; }
-    a.back { color: #1f7a72; text-decoration: none; font-size: .85rem; }
-    h1 { margin: .6rem 0 .2rem; }
-    .subtitle { color: #5b6b68; margin-bottom: 1.5rem; }
-    .panel { background: #fff; border: 1px solid #d7ddda; border-radius: 8px; padding: 1.2rem; margin-bottom: 1.5rem; }
-    .panel h3 { margin-top: 0; }
-    canvas { max-height: 280px; }
-  </style>
-</head>
-<body>
-  <a class="back" href="/">&larr; Back to dashboard</a>
-  <h1>Risk Trends</h1>
-  <div class="subtitle">Where risk is coming from, over time</div>
+{% extends "base.html" %}
+{% block title %}Trends · SBOM Risk Scorer{% endblock %}
+{% block body %}
+<h1>Risk Trends</h1>
+<p class="sub">Where risk is coming from, over time. Tip: click a legend entry on any chart to toggle it.</p>
 
-  <div class="panel">
-    <h3>New CVE disclosures affecting our dependencies, by month</h3>
-    <canvas id="cveChart"></canvas>
+<div class="card">
+  <div class="toolbar" style="margin-bottom:.6rem">
+    <h2 style="margin:0;flex:1">CVE disclosures affecting our dependencies</h2>
+    <label>View</label>
+    <select id="cveMode"><option value="monthly">Per month</option><option value="cumulative">Cumulative</option></select>
+    <label>As</label>
+    <select id="cveType"><option value="line">Line</option><option value="bar">Bar</option></select>
   </div>
+  <canvas id="cveChart" height="90"></canvas>
+</div>
 
-  <div class="panel">
-    <h3>Unmaintained libraries, by last-release year</h3>
-    <canvas id="staleChart"></canvas>
+<div class="card" style="margin-top:1rem;">
+  <div class="toolbar" style="margin-bottom:.6rem">
+    <h2 style="margin:0;flex:1">Unmaintained libraries, by last-release year</h2>
+    <label>As</label>
+    <select id="staleType"><option value="bar">Bar</option><option value="line">Line</option></select>
   </div>
+  <canvas id="staleChart" height="90"></canvas>
+</div>
+{% endblock %}
 
-  <script>
-    new Chart(document.getElementById('cveChart'), {
-      type: 'line',
-      data: { labels: {{ cve_months|tojson }}, datasets: [{ label: 'CVEs disclosed', data: {{ cve_counts|tojson }},
-        borderColor: '#a8291e', backgroundColor: 'rgba(168,41,30,0.12)', fill: true, tension: .25 }] },
-      options: { plugins: { legend: { display: false } } }
-    });
-    new Chart(document.getElementById('staleChart'), {
-      type: 'bar',
-      data: { labels: {{ stale_years|tojson }}, datasets: [{ label: 'Unmaintained libraries', data: {{ stale_counts|tojson }},
-        backgroundColor: '#b5701c' }] },
-      options: { plugins: { legend: { display: false } } }
-    });
-  </script>
-</body>
-</html>
+{% block scripts %}
+<script src="{{ url_for('static', filename='chart.min.js') }}"></script>
+<script>
+const cveMonths = {{ cve_months|tojson }};
+const cveCounts = {{ cve_counts|tojson }};
+const cumulative = arr => arr.reduce((a,v)=>{a.push((a.length?a[a.length-1]:0)+v);return a;},[]);
+
+let cveChart;
+function drawCve() {
+  const mode = document.getElementById('cveMode').value;
+  const type = document.getElementById('cveType').value;
+  const data = mode === 'cumulative' ? cumulative(cveCounts) : cveCounts;
+  if (cveChart) cveChart.destroy();
+  cveChart = new Chart(document.getElementById('cveChart'), {
+    type,
+    data: { labels: cveMonths, datasets: [{ label: mode==='cumulative'?'CVEs (cumulative)':'CVEs',
+      data, borderColor:'#c0392b', backgroundColor:'rgba(192,57,43,.15)', fill:type==='line', tension:.25 }] },
+    options: { plugins:{legend:{display:true}}, scales:{y:{beginAtZero:true}} }
+  });
+}
+document.getElementById('cveMode').addEventListener('change', drawCve);
+document.getElementById('cveType').addEventListener('change', drawCve);
+drawCve();
+
+let staleChart;
+function drawStale() {
+  const type = document.getElementById('staleType').value;
+  if (staleChart) staleChart.destroy();
+  staleChart = new Chart(document.getElementById('staleChart'), {
+    type,
+    data: { labels: {{ stale_years|tojson }}, datasets: [{ label:'Unmaintained libraries',
+      data: {{ stale_counts|tojson }}, backgroundColor:'#e67e22', borderColor:'#e67e22', fill:false, tension:.25 }] },
+    options: { plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}} }
+  });
+}
+document.getElementById('staleType').addEventListener('change', drawStale);
+drawStale();
+</script>
+{% endblock %}

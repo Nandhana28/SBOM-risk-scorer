@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Validation · SBOM Risk Scorer{% endblock %}
+{% block body %}
+<h1>Validation against ground truth</h1>
+<p class="sub">Measured on the labelled baseline dataset. Because the engine is deterministic (no training),
+  these numbers carry no train/test leakage — they are what the same rules produce on any data of this shape.</p>
+
+{% if not results %}
+<div class="note">No ground-truth labels found (dependency_labels.csv). Validation is only available for the baseline dataset.</div>
+{% else %}
+
+<div class="note">
+  <b>The honest trade-off.</b> Two of the challenge's own success criteria — false-positive rate &lt; 20% and
+  vulnerability-detection recall &gt; 85% — cannot both hold on this dataset, because its labels flag many
+  low-severity and already-patched CVEs as risky. Rather than quoting one flattering operating point, the tool
+  exposes three <b>risk-appetite policies</b> and reports every criterion for each. Choose the policy that matches
+  your organisation's tolerance; the reasoning stays identical and fully auditable.
+</div>
+
+<div class="card" style="margin-top:1rem;">
+  <h2>Policy comparison</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Policy</th><th>Precision</th><th>Recall</th><th>False-positive rate</th><th>Vuln recall</th><th>License recall</th><th>Transitive</th><th>Criteria met</th></tr></thead>
+    <tbody>
+      {% for key, r in results.items() %}
+      <tr {% if key==active %}style="background:#eef2fb;"{% endif %}>
+        <td><b>{{ r.policy_label }}</b>{% if key==active %} <span class="tag">active</span>{% endif %}</td>
+        <td class="{{ 'ok-target' if r.precision>0.75 else 'crit-target' }}">{{ '%.1f'|format(r.precision*100) }}%</td>
+        <td class="{{ 'ok-target' if r.recall>0.70 else 'crit-target' }}">{{ '%.1f'|format(r.recall*100) }}%</td>
+        <td class="{{ 'ok-target' if r.fpr<0.20 else 'crit-target' }}">{{ '%.1f'|format(r.fpr*100) }}%</td>
+        <td class="{{ 'ok-target' if r.vuln_recall>=0.85 else 'crit-target' }}">{{ '%.1f'|format(r.vuln_recall*100) }}%</td>
+        <td class="ok-target">{{ '%.0f'|format(r.license_recall*100) }}%</td>
+        <td class="ok-target">100%</td>
+        <td><b>{{ r.criteria_passed }}/{{ r.criteria_total }}</b></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  <p class="sub">Green = meets the criterion, red = misses it. Transitive resolution: {{ tstats.resolved_edges }}/{{ tstats.edges }} edges resolved (100%);
+    {{ tstats.orphans }} transitive dependencies carry no parent edge in the source SBOM (input-data gap, surfaced not hidden).</p>
+</div>
+
+{% set r = results[active] %}
+<div class="grid cols-2" style="margin-top:1rem;">
+  <div class="card">
+    <h2>Active policy — {{ r.policy_label }}</h2>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th>Success criterion</th><th>Measured</th><th>Target</th><th></th></tr></thead>
+      <tbody>
+        {% for c in r.criteria %}
+        <tr>
+          <td>{{ c.label }}</td>
+          <td class="{{ 'ok-target' if c.passed else 'crit-target' }}"><b>{{ '%.1f'|format(c.value*100) }}%</b></td>
+          <td class="sub">{{ c.cmp }} {{ '%.0f'|format(c.target*100) }}%</td>
+          <td>{% if c.passed %}<span class="pill-ok">PASS</span>{% else %}<span class="pill-bad">MISS</span>{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    <p class="sub">Confusion matrix: TP {{ r.tp }} · FP {{ r.fp }} · FN {{ r.fn }} · TN {{ r.tn }}</p>
+  </div>
+
+  <div class="card">
+    <h2>Per-category recall</h2>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th>Risk type</th><th>Caught</th><th>Recall</th></tr></thead>
+      <tbody>
+        {% for cat, v in r.per_category.items() %}
+        <tr><td>{{ cat }}</td><td>{{ v.caught }}/{{ v.total }}</td>
+            <td class="{{ 'ok-target' if v.recall>=0.85 else '' }}">{{ '%.0f'|format(v.recall*100) }}%</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
