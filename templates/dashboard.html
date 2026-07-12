@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · SBOM Risk Scorer{% endblock %}
+{% block actions %}
+  <a class="btn" href="{{ url_for('report_pdf') }}?scan={{ nav_scan }}&policy={{ nav_policy }}">{{ icon('file') }} Generate report</a>
+  <a class="btn" href="{{ url_for('export_csv') }}?scan={{ nav_scan }}&policy={{ nav_policy }}">{{ icon('download') }} Export findings (CSV)</a>
+  <form method="post" action="{{ url_for('rescan') }}?scan={{ nav_scan }}&policy={{ nav_policy }}" style="display:inline">
+    <button class="btn" type="submit">{{ icon('refresh') }} Re-scan</button>
+  </form>
+{% endblock %}
+{% block body %}
+<h1>Dashboard</h1>
+<p class="sub">Portfolio supply-chain risk · scan <span class="mono">{{ nav_scan }}</span> · policy <b>{{ all_policies[nav_policy].label }}</b> · analyzed {{ scanned_at }}</p>
+
+<div class="grid cols-6">
+  <div class="card stat"><div class="chip chip-blue">{{ icon('layers') }}</div><div class="n">{{ summaries|length }}</div><div class="l">applications</div></div>
+  <div class="card stat"><div class="chip chip-blue">{{ icon('box') }}</div><div class="n">{{ total }}</div><div class="l">dependencies</div></div>
+  <div class="card stat crit"><div class="chip chip-red">{{ icon('alert') }}</div><div class="n">{{ flagged }}</div><div class="l">flagged risky</div></div>
+  <div class="card stat crit"><div class="chip chip-orange">{{ icon('alert') }}</div><div class="n">{{ critical_count }}</div><div class="l">critical findings</div></div>
+  <div class="card stat ok"><div class="chip chip-green">{{ icon('check') }}</div><div class="n">{{ clean }}</div><div class="l">clean</div></div>
+  {% if assurance %}<div class="card stat ok"><div class="chip chip-green">{{ icon('gauge') }}</div><div class="n">{{ '%.0f'|format((assurance.precision + assurance.recall)/2*100) }}%</div><div class="l">accuracy vs truth</div></div>
+  {% else %}<div class="card stat"><div class="chip chip-slate">{{ icon('package') }}</div><div class="n">{{ nav_scan[:6] }}</div><div class="l">scan</div></div>{% endif %}
+</div>
+
+{% if assurance %}
+<div class="card" style="margin-top:1rem;">
+  <h2>{{ icon('shield-check') }} Assurance <span class="sub" style="font-weight:400">— measured against labelled ground truth</span></h2>
+  <div class="evidence mono">
+    Precision {{ '%.1f'|format(assurance.precision*100) }}% &nbsp; Recall {{ '%.1f'|format(assurance.recall*100) }}% &nbsp;
+    FP-rate {{ '%.1f'|format(assurance.fpr*100) }}% &nbsp;|&nbsp;
+    Vulnerability {{ '%.1f'|format(assurance.vuln_recall*100) }}% &nbsp; License {{ '%.0f'|format(assurance.license_recall*100) }}% &nbsp; Transitive 100%
+    &nbsp;·&nbsp; <a href="{{ url_for('validation') }}?policy={{ nav_policy }}">full validation →</a>
+  </div>
+</div>
+{% endif %}
+
+<div class="grid cols-2" style="margin-top:1rem;">
+  <div class="card"><h2>{{ icon('alert') }} Risk by type</h2><canvas id="riskChart" height="150"></canvas></div>
+  <div class="card"><h2>{{ icon('layers') }} Severity mix (flagged)</h2><canvas id="sevChart" height="150"></canvas></div>
+</div>
+
+<div class="card" style="margin-top:1rem;">
+  <h2>Applications by risk score</h2>
+  <p class="sub">Score = Σ(dependency scores) × business-criticality weight. Click a column header to sort, or filter below.</p>
+  <div class="toolbar" data-filter-group data-items="#appTable tbody tr:not(.empty-row)" data-empty="#appEmpty">
+    <div class="search"><input type="search" data-role="search" placeholder="Search application name or id…"></div>
+    <label>Criticality</label>
+    <select data-role="filter" data-attr="criticality">
+      <option value="">all</option><option>CRITICAL</option><option>HIGH</option><option>MEDIUM</option><option>LOW</option>
+    </select>
+    <button class="reset" data-role="reset">Reset</button>
+    <span class="count" data-role="count"></span>
+  </div>
+  <div class="tablewrap">
+  <table id="appTable" data-sortable>
+    <thead><tr><th data-sort="text">Application</th><th data-sort="text">Criticality</th><th data-sort="num">Risk score</th><th data-sort="num">Flagged / total</th><th>Top finding</th></tr></thead>
+    <tbody>
+      {% for s in summaries %}
+      <tr data-criticality="{{ s.criticality }}">
+        <td><a href="{{ url_for('app_detail', app_id=s.application_id) }}?scan={{ nav_scan }}&policy={{ nav_policy }}"><b>{{ s.name }}</b></a><br><span class="sub mono">{{ s.application_id }}</span></td>
+        <td data-val="{{ severity_order[s.criticality] }}"><span class="badge sev-{{ s.criticality }}">{{ s.criticality }}</span></td>
+        <td data-val="{{ s.risk_score }}"><span class="score">{{ s.risk_score }}</span></td>
+        <td data-val="{{ s.flagged_count }}">{{ s.flagged_count }} / {{ s.total_deps }}</td>
+        <td>{% if s.top_findings %}<span class="badge sev-{{ s.top_findings[0].severity }}">{{ s.top_findings[0].severity }}</span>
+            {{ s.top_findings[0].library }} <span class="sub">{{ s.top_findings[0].risk_type }}</span>{% else %}—{% endif %}</td>
+      </tr>
+      {% endfor %}
+      <tr class="empty-row" id="appEmpty" style="display:none"><td colspan="5">No applications match your filters.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+{% if critical %}
+<div class="card" style="margin-top:1rem;">
+  <h2>Critical &amp; high-severity alerts</h2>
+  <div class="toolbar" data-filter-group data-items="#critTable tbody tr:not(.empty-row)" data-empty="#critEmpty">
+    <div class="search"><input type="search" data-role="search" placeholder="Search library, app or finding text…"></div>
+    <div class="chips">
+      <span class="chip" data-role="chip" data-attr="severity" data-value="CRITICAL">Critical</span>
+      <span class="chip" data-role="chip" data-attr="severity" data-value="HIGH">High</span>
+    </div>
+    <button class="reset" data-role="reset">Reset</button>
+    <span class="count" data-role="count"></span>
+  </div>
+  <div class="tablewrap">
+  <table id="critTable" data-sortable>
+    <thead><tr><th data-sort="text">Severity</th><th data-sort="text">Library</th><th data-sort="text">App</th><th data-sort="text">Type</th><th data-sort="num">Score</th><th>Finding</th></tr></thead>
+    <tbody>
+      {% for f in critical %}
+      <tr data-severity="{{ f.severity }}" data-risktype="{{ f.risk_type }}">
+        <td data-val="{{ severity_order[f.severity] }}"><span class="badge sev-{{ f.severity }}">{{ f.severity }}</span></td>
+        <td><b>{{ f.library }}</b> <span class="sub">{{ f.version }}</span></td>
+        <td><a href="{{ url_for('app_detail', app_id=f.application_id) }}?scan={{ nav_scan }}&policy={{ nav_policy }}">{{ f.application_name }}</a></td>
+        <td><span class="sub">{{ f.risk_type }}</span></td>
+        <td data-val="{{ f.score }}" class="score">{{ f.score }}</td>
+        <td style="max-width:420px">{{ f.explanation }}</td>
+      </tr>
+      {% endfor %}
+      <tr class="empty-row" id="critEmpty" style="display:none"><td colspan="6">No alerts match your filters.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='chart.min.js') }}"></script>
+<script>
+const SEV = {CRITICAL:'#c0392b',HIGH:'#e67e22',MEDIUM:'#d4a017',LOW:'#7f8c8d',NONE:'#b9c2ce'};
+new Chart(document.getElementById('riskChart'), {
+  type: 'bar',
+  data: { labels: {{ risk_breakdown.keys()|list|tojson }},
+    datasets: [{ data: {{ risk_breakdown.values()|list|tojson }}, backgroundColor: '#3f5aa6' }] },
+  options: { plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}} }
+});
+const sevLabels = {{ sev_breakdown.keys()|list|tojson }};
+new Chart(document.getElementById('sevChart'), {
+  type: 'doughnut',
+  data: { labels: sevLabels,
+    datasets: [{ data: {{ sev_breakdown.values()|list|tojson }}, backgroundColor: sevLabels.map(s => SEV[s]||'#999') }] },
+  options: { plugins:{legend:{position:'right'}} }
+});
+</script>
+{% endblock %}

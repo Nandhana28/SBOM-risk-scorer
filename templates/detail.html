@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}{{ app.name }} · Detail{% endblock %}
+{% block actions %}
+  <a class="btn" href="{{ url_for('inventory') }}?scan={{ nav_scan }}&policy={{ nav_policy }}">{{ icon('chevron') }} Inventory</a>
+  <a class="btn" href="{{ url_for('export_cyclonedx', app_id=app.app_id) }}?scan={{ nav_scan }}&policy={{ nav_policy }}">{{ icon('download') }} Export CycloneDX</a>
+{% endblock %}
+{% block body %}
+<h1>{{ app.name }}</h1>
+<p class="sub">
+  {% if app.business_owner %}Owner {{ app.business_owner }} · {% endif %}
+  {% if app.department %}{{ app.department }} · {% endif %}
+  {% if app.language %}{{ app.language }} · {% endif %}
+  {% if app.deployment %}{{ app.deployment }} · {% endif %}
+  license model <b>{{ app.license_model }}</b>
+</p>
+
+<div class="grid cols-4">
+  <div class="card stat crit"><div class="chip chip-red">{{ icon('gauge') }}</div><div class="n">{{ summary.risk_score if summary else 0 }}</div><div class="l">Risk score</div></div>
+  <div class="card stat warn"><div class="chip chip-orange">{{ icon('alert') }}</div><div class="n">{{ findings|length }}</div><div class="l">Flagged</div></div>
+  <div class="card stat ok"><div class="chip chip-green">{{ icon('check') }}</div><div class="n">{{ clean_count }}</div><div class="l">Clean</div></div>
+  <div class="card stat"><div class="chip chip-blue">{{ icon('box') }}</div><div class="n">{{ total }}</div><div class="l">Total deps</div></div>
+</div>
+
+{% if summary %}
+<div class="card" style="margin-top:1rem;">
+  <h2>How this app's score was computed</h2>
+  <div class="evidence">
+    Raw dependency total <code>{{ summary.score_breakdown.raw_dependency_total }}</code>
+    × criticality weight <code>{{ summary.score_breakdown.criticality_weight }}</code>
+    ({{ summary.score_breakdown.criticality }})
+    = <b>{{ summary.score_breakdown.weighted_score }}</b>
+  </div>
+</div>
+{% endif %}
+
+<div class="card" style="margin-top:1rem;">
+  <h2>Flagged dependencies — audit trail</h2>
+  <p class="sub">Every finding shows the rule that fired, the evidence it fired on, and the score breakdown. Nothing is inferred by a model.</p>
+  {% if findings %}
+  <div class="toolbar" data-filter-group data-items="#findingsList .finding-item" data-empty="#findingsEmpty">
+    <div class="search"><input type="search" data-role="search" placeholder="Search library, CVE, licence, explanation…"></div>
+    <div class="chips">
+      <span class="chip" data-role="chip" data-attr="risktype" data-value="VULNERABLE_DEPENDENCY">Vulnerable</span>
+      <span class="chip" data-role="chip" data-attr="risktype" data-value="TRANSITIVE_VULNERABILITY">Transitive vuln</span>
+      <span class="chip" data-role="chip" data-attr="risktype" data-value="LICENSE_CONFLICT">License</span>
+      <span class="chip" data-role="chip" data-attr="risktype" data-value="TRANSITIVE_LICENSE_CONFLICT">Transitive license</span>
+      <span class="chip" data-role="chip" data-attr="risktype" data-value="LICENSE_UNKNOWN">Unknown license</span>
+      <span class="chip" data-role="chip" data-attr="risktype" data-value="UNMAINTAINED">Unmaintained</span>
+    </div>
+    <select data-role="filter" data-attr="severity">
+      <option value="">all severities</option><option>CRITICAL</option><option>HIGH</option><option>MEDIUM</option><option>LOW</option>
+    </select>
+    <button class="reset" data-role="reset">Reset</button>
+    <span class="count" data-role="count"></span>
+  </div>
+  {% endif %}
+  <div id="findingsList">
+  {% for f in findings %}
+  <div class="finding-item" data-severity="{{ f.severity }}" data-risktype="{{ f.risk_type }}" style="border-top:1px solid var(--line); padding:.9rem 0;">
+    <div style="display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+      <div>
+        <span class="badge sev-{{ f.severity }}">{{ f.severity }}</span>
+        <b>{{ f.library }}</b> <span class="mono sub">{{ f.version }}</span>
+        <span class="tag">{{ f.risk_type }}</span>
+        <span class="tag">rule {{ f.rule_id }}</span>
+        {% if f.dependency_type == 'transitive' %}<span class="tag">transitive</span>{% endif %}
+      </div>
+      <div class="score">score {{ f.score }}</div>
+    </div>
+    <p style="margin:.4rem 0;">{{ f.explanation }}</p>
+    {% if f.parents %}<p class="sub">Pulled in via {% for lib, ver in f.parents %}<span class="mono">{{ lib }}:{{ ver }}</span>{% if not loop.last %}, {% endif %}{% endfor %}</p>{% endif %}
+
+    <div class="grid cols-2">
+      <div class="evidence">
+        <b>Evidence</b>
+        <dl class="kv">
+          {% for k, v in f.evidence.items() %}<dt>{{ k }}</dt><dd>{{ v }}</dd>{% endfor %}
+        </dl>
+      </div>
+      <div class="evidence">
+        <b>Score breakdown</b>
+        <ul class="breakdown">
+          {% for item in f.score_breakdown %}
+          <li><span>{{ item.component }}: {{ item.detail }}</span><span class="pts">{{ item.points }}</span></li>
+          {% endfor %}
+          <li><span><b>Total</b></span><span class="pts">{{ f.score }}</span></li>
+        </ul>
+      </div>
+    </div>
+    {% if f.remediation %}<p style="margin:.4rem 0 0; color:var(--brand-2);"><b>Fix:</b> {{ f.remediation }}</p>{% endif %}
+  </div>
+  {% else %}
+  <p class="sub">No flagged dependencies under the current policy.</p>
+  {% endfor %}
+  <p class="sub" id="findingsEmpty" style="display:none">No findings match your filters.</p>
+  </div>
+</div>
+{% endblock %}

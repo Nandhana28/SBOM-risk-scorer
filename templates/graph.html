@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Dependency Graph · SBOM Risk Scorer{% endblock %}
+{% block head %}<script src="{{ url_for('static', filename='vis-network.min.js') }}"></script>{% endblock %}
+{% block body %}
+<h1>Dependency Graph</h1>
+<p class="sub">Application → direct dependency → transitive dependency, coloured by risk severity.</p>
+
+<div class="toolbar">
+  <form method="get" style="display:contents">
+    <input type="hidden" name="scan" value="{{ nav_scan }}"><input type="hidden" name="policy" value="{{ nav_policy }}">
+    <label>Application</label>
+    <select name="app" onchange="this.form.submit()">
+      {% for a in apps %}<option value="{{ a.app_id }}" {{ 'selected' if a.app_id==current_app_id }}>{{ a.name }}</option>{% endfor %}
+    </select>
+  </form>
+  <div class="search" style="max-width:220px"><input type="search" id="nodeSearch" placeholder="Find a library in the graph…"></div>
+  <label>Show</label>
+  <div class="chips" id="sevChips">
+    <span class="chip on" data-sev="CRITICAL">Critical</span>
+    <span class="chip on" data-sev="HIGH">High</span>
+    <span class="chip on" data-sev="MEDIUM">Medium</span>
+    <span class="chip on" data-sev="LOW">Low</span>
+    <span class="chip on" data-sev="NONE">Clean</span>
+  </div>
+</div>
+
+<div class="card" style="padding:.4rem;"><div id="net" style="height:600px;"></div></div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const rawNodes = {{ nodes_json|safe }};
+const nodes = new vis.DataSet(rawNodes);
+const edges = new vis.DataSet({{ edges_json|safe }});
+const network = new vis.Network(document.getElementById('net'), { nodes, edges }, {
+  nodes: { shape: 'dot', size: 11, font: { size: 12 } },
+  edges: { arrows: 'to', color: { color: '#c7d0d8' }, smooth: false },
+  physics: { solver: 'forceAtlas2Based',
+    forceAtlas2Based: { gravitationalConstant: -80, springLength: 90, springConstant: .08 },
+    stabilization: { iterations: 150, fit: true } },
+  interaction: { hover: true }
+});
+network.once('stabilizationIterationsDone', function(){ network.setOptions({ physics: false }); });
+
+// severity chip toggles -> hide/show nodes (the app node has no sev and always shows)
+const active = new Set(['CRITICAL','HIGH','MEDIUM','LOW','NONE']);
+function applySev() {
+  nodes.update(rawNodes.map(n => ({ id: n.id, hidden: n.sev ? !active.has(n.sev) : false })));
+}
+document.querySelectorAll('#sevChips .chip').forEach(chip => chip.addEventListener('click', () => {
+  const s = chip.dataset.sev;
+  if (active.has(s)) { active.delete(s); chip.classList.remove('on'); }
+  else { active.add(s); chip.classList.add('on'); }
+  applySev();
+}));
+
+// node search -> focus + select the first matching library
+document.getElementById('nodeSearch').addEventListener('input', e => {
+  const q = e.target.value.toLowerCase().trim();
+  if (!q) { network.unselectAll(); return; }
+  const hit = rawNodes.find(n => (n.label||'').toLowerCase().includes(q) && n.sev);
+  if (hit) { network.selectNodes([hit.id]); network.focus(hit.id, { scale: 1.2, animation: true }); }
+});
+</script>
+{% endblock %}

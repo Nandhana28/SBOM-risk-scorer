@@ -1,0 +1,501 @@
+dep_id,application_id,application_name,library,version,is_risky,risk_type,severity,score,explanation
+DEP-0001,APP-001,CustomerPortal,micrometer-core,3.0.10,True,VULNERABLE_DEPENDENCY,MEDIUM,9.15,"micrometer-core:3.0.10 has CVE-2026-1050 (CVSS 6.1, MEDIUM). No patch available. [risk model confidence: 70%]"
+DEP-0002,APP-001,CustomerPortal,sqlalchemy,5.13.5,True,VULNERABLE_DEPENDENCY,LOW,4.65,"sqlalchemy:5.13.5 has CVE-2024-1183 (CVSS 3.1, LOW). No patch available. [risk model confidence: 100%]"
+DEP-0003,APP-001,CustomerPortal,netty-all,2.7.4,False,NONE,NONE,0.0,
+DEP-0004,APP-001,CustomerPortal,json-iterator,2.3.2,True,VULNERABLE_DEPENDENCY,MEDIUM,9.75,"json-iterator:2.3.2 has CVE-2022-1083 (CVSS 6.5, MEDIUM). No patch available. [risk model confidence: 68%]"
+DEP-0005,APP-001,CustomerPortal,log4j-api,5.1.3,True,VULNERABLE_DEPENDENCY,MEDIUM,9.45,"log4j-api:5.1.3 has CVE-2022-1041 (CVSS 6.3, MEDIUM). No patch available. [risk model confidence: 72%]"
+DEP-0006,APP-001,CustomerPortal,commons-collections4,4.7.1,True,UNMAINTAINED,LOW,2.0,"commons-collections4 last updated 2021-03-31, over 2 years old. [risk model confidence: 99%]"
+DEP-0007,APP-001,CustomerPortal,commons-codec,4.11.10,False,NONE,NONE,0.0,
+DEP-0008,APP-001,CustomerPortal,gson,1.6.10,False,NONE,NONE,0.0,
+DEP-0009,APP-001,CustomerPortal,lombok,4.1.2,True,VULNERABLE_DEPENDENCY,CRITICAL,9.9,"lombok:4.1.2 has CVE-2023-1002 (CVSS 9.9, CRITICAL). Patched in 4.10.0. [risk model confidence: 100%]"
+DEP-0010,APP-001,CustomerPortal,werkzeug,1.7.10,True,VULNERABLE_DEPENDENCY,MEDIUM,8.4,"werkzeug:1.7.10 has CVE-2024-1004 (CVSS 5.6, MEDIUM). No patch available. [risk model confidence: 100%]"
+DEP-0011,APP-001,CustomerPortal,jackson-annotations,5.0.6,True,VULNERABLE_DEPENDENCY,HIGH,8.0,"jackson-annotations:5.0.6 has CVE-2023-1017 (CVSS 8.0, HIGH). Patched in 5.5.0. [risk model confidence: 90%]"
+DEP-0012,APP-001,CustomerPortal,resilience4j,1.8.0,False,NONE,NONE,0.0,
+DEP-0013,APP-001,CustomerPortal,slf4j-api,2.8.8,False,NONE,NONE,0.0,
+DEP-0014,APP-001,CustomerPortal,go-jwt,5.10.5,True,LICENSE_UNKNOWN,HIGH,3.0,go-jwt has no declared license — legal status unknown.
+DEP-0015,APP-001,CustomerPortal,spring-security-core,1.2.0,True,VULNERABLE_DEPENDENCY,LOW,3.3,"spring-security-core:1.2.0 has CVE-2024-1104 (CVSS 3.3, LOW). Patched in 3.4.0. [risk model confidence: 79%]"
+DEP-0016,APP-001,CustomerPortal,snakeyaml,3.1.0,False,NONE,NONE,0.0,
+DEP-0017,APP-001,CustomerPortal,opentelemetry-api,4.10.2,False,NONE,NONE,0.0,
+DEP-0018,APP-001,CustomerPortal,logback-core,3.4.2,False,NONE,NONE,0.0,
+DEP-0019,APP-001,CustomerPortal,pyyaml,5.7.10,True,VULNERABLE_DEPENDENCY,CRITICAL,9.3,"pyyaml:5.7.10 has CVE-2022-1069 (CVSS 9.3, CRITICAL). Patched in 5.10.0. [risk model confidence: 100%]"
+DEP-0020,APP-001,CustomerPortal,jackson-databind,1.1.6,False,NONE,NONE,0.0,
+DEP-0021,APP-001,CustomerPortal,caffeine,2.5.7,True,VULNERABLE_DEPENDENCY,MEDIUM,5.5,"caffeine:2.5.7 has CVE-2022-1085 (CVSS 5.5, MEDIUM). Patched in 4.7.0. [risk model confidence: 85%]"
+DEP-0022,APP-001,CustomerPortal,log4j-core,2.2.8,False,NONE,NONE,0.0,
+DEP-0023,APP-001,CustomerPortal,grpc-core,2.1.1,False,NONE,NONE,0.0,
+DEP-0024,APP-001,CustomerPortal,jedis,3.9.3,True,VULNERABLE_DEPENDENCY,LOW,1.1,"jedis:3.9.3 has CVE-2025-1195 (CVSS 1.1, LOW). Patched in 6.0.0. [risk model confidence: 55%]"
+DEP-0025,APP-001,CustomerPortal,jetty-server,2.3.0,False,NONE,NONE,0.0,
+DEP-0026,APP-001,CustomerPortal,commons-lang3,4.11.2,False,NONE,NONE,0.0,
+DEP-0027,APP-001,CustomerPortal,mockito-core,1.2.10,True,VULNERABLE_DEPENDENCY,HIGH,13.05,"mockito-core:1.2.10 has CVE-2025-1076 (CVSS 8.7, HIGH). No patch available. [risk model confidence: 83%]"
+DEP-0028,APP-001,CustomerPortal,junit-jupiter,4.1.8,True,UNMAINTAINED,LOW,2.0,"junit-jupiter last updated 2024-03-30, over 2 years old. [risk model confidence: 99%]"
+DEP-0029,APP-001,CustomerPortal,hibernate-validator,1.13.1,True,VULNERABLE_DEPENDENCY,CRITICAL,9.7,"hibernate-validator:1.13.1 has CVE-2024-1060 (CVSS 9.7, CRITICAL). Patched in 2.8.0. [risk model confidence: 100%]"
+DEP-0030,APP-001,CustomerPortal,guava,1.2.6,False,NONE,NONE,0.0,
+DEP-0031,APP-001,CustomerPortal,h2-database,5.3.1,False,NONE,NONE,0.0,
+DEP-0032,APP-001,CustomerPortal,mapstruct,4.15.0,False,NONE,NONE,0.0,
+DEP-0033,APP-001,CustomerPortal,kafka-clients,4.8.5,True,LICENSE_CONFLICT,CRITICAL,8.0,GPL-3.0 license is incompatible with proprietary app CustomerPortal.
+DEP-0034,APP-001,CustomerPortal,mysql-connector-java,4.2.3,False,NONE,NONE,0.0,
+DEP-0035,APP-001,CustomerPortal,sarama,5.0.2,True,UNMAINTAINED,LOW,2.0,"sarama last updated 2020-04-13, over 2 years old. [risk model confidence: 99%]"
+DEP-0036,APP-001,CustomerPortal,tomcat-embed-core,2.7.8,False,NONE,NONE,0.0,
+DEP-0037,APP-001,CustomerPortal,fabric,3.0.6,False,NONE,NONE,0.0,
+DEP-0038,APP-001,CustomerPortal,commons-io,2.4.6,False,NONE,NONE,0.0,
+DEP-0039,APP-001,CustomerPortal,spring-core,2.9.0,False,NONE,NONE,0.0,
+DEP-0040,APP-001,CustomerPortal,assertj-core,3.6.6,False,NONE,NONE,0.0,
+DEP-0041,APP-001,CustomerPortal,jackson-core,4.9.1,True,TRANSITIVE_LICENSE_CONFLICT,CRITICAL,6.0,"AGPL-3.0 license is incompatible with proprietary app CustomerPortal. Pulled in transitively via lombok:4.1.2, snakeyaml:3.1.0."
+DEP-0042,APP-001,CustomerPortal,hibernate-core,3.4.1,True,ELEVATED_RISK,LOW,1.12,"hibernate-core flagged by the risk model on combined signal strength (no single dominant factor -- age 386 days, exploitability/patch history considered together) [confidence: 66%]."
+DEP-0043,APP-001,CustomerPortal,disruptor,2.2.8,True,ELEVATED_RISK,LOW,1.12,"disruptor flagged by the risk model on combined signal strength (no single dominant factor -- age 55 days, exploitability/patch history considered together) [confidence: 89%]."
+DEP-0044,APP-001,CustomerPortal,spring-web,2.11.0,False,NONE,NONE,0.0,
+DEP-0045,APP-001,CustomerPortal,logback-classic,4.11.0,True,UNMAINTAINED,LOW,1.5,"logback-classic last updated 2024-01-27, over 2 years old. [risk model confidence: 99%]"
+DEP-0046,APP-001,CustomerPortal,eslint,2.10.8,False,NONE,NONE,0.0,
+DEP-0047,APP-001,CustomerPortal,aws-sdk-s3,2.4.1,False,NONE,NONE,0.0,
+DEP-0048,APP-001,CustomerPortal,crypto-go,3.10.1,False,NONE,NONE,0.0,
+DEP-0049,APP-001,CustomerPortal,httpcore,3.4.4,False,NONE,NONE,0.0,
+DEP-0050,APP-001,CustomerPortal,netty-handler,1.7.3,True,TRANSITIVE_VULNERABILITY,MEDIUM,4.12,"netty-handler:1.7.3 has CVE-2023-1080 (CVSS 5.5, MEDIUM). Patched in 1.10.0. Pulled in transitively via jetty-server:2.3.0, guava:1.2.6, mapstruct:4.15.0. [risk model confidence: 86%]"
+DEP-0051,APP-002,PaymentService,caffeine,4.4.5,True,VULNERABLE_DEPENDENCY,MEDIUM,5.5,"caffeine:4.4.5 has CVE-2022-1085 (CVSS 5.5, MEDIUM). Patched in 4.7.0. [risk model confidence: 84%]"
+DEP-0052,APP-002,PaymentService,aws-sdk-s3,2.0.9,True,VULNERABLE_DEPENDENCY,MEDIUM,4.1,"aws-sdk-s3:2.0.9 has CVE-2021-1093 (CVSS 4.1, MEDIUM). Patched in 3.2.0. [risk model confidence: 99%]"
+DEP-0053,APP-002,PaymentService,resilience4j,5.1.10,False,NONE,NONE,0.0,
+DEP-0054,APP-002,PaymentService,snakeyaml,3.15.2,True,VULNERABLE_DEPENDENCY,HIGH,8.4,"snakeyaml:3.15.2 has CVE-2024-1013 (CVSS 8.4, HIGH). Patched in 4.4.0. [risk model confidence: 93%]"
+DEP-0055,APP-002,PaymentService,vue,3.3.1,False,NONE,NONE,0.0,
+DEP-0056,APP-002,PaymentService,httpcore,5.15.3,False,NONE,NONE,0.0,
+DEP-0057,APP-002,PaymentService,logback-core,4.9.4,False,NONE,NONE,0.0,
+DEP-0058,APP-002,PaymentService,grpc-core,3.11.7,False,NONE,NONE,0.0,
+DEP-0059,APP-002,PaymentService,httpclient,4.14.4,False,NONE,NONE,0.0,
+DEP-0060,APP-002,PaymentService,guava,1.5.1,False,NONE,NONE,0.0,
+DEP-0061,APP-002,PaymentService,aws-sdk-sqs,2.15.7,False,NONE,NONE,0.0,
+DEP-0062,APP-002,PaymentService,redis-py,4.11.10,False,NONE,NONE,0.0,
+DEP-0063,APP-002,PaymentService,jedis,2.15.7,True,VULNERABLE_DEPENDENCY,LOW,1.1,"jedis:2.15.7 has CVE-2025-1195 (CVSS 1.1, LOW). Patched in 6.0.0. [risk model confidence: 84%]"
+DEP-0064,APP-002,PaymentService,spring-boot-starter,4.7.1,False,NONE,NONE,0.0,
+DEP-0065,APP-002,PaymentService,spring-web,4.0.1,True,LICENSE_UNKNOWN,HIGH,3.0,spring-web has no declared license — legal status unknown.
+DEP-0066,APP-002,PaymentService,hibernate-validator,4.10.5,True,VULNERABLE_DEPENDENCY,MEDIUM,7.8,"hibernate-validator:4.10.5 has CVE-2021-1061 (CVSS 5.2, MEDIUM). No patch available. [risk model confidence: 94%]"
+DEP-0067,APP-002,PaymentService,assertj-core,2.0.5,True,VULNERABLE_DEPENDENCY,MEDIUM,7.5,"assertj-core:2.0.5 has CVE-2024-1118 (CVSS 5.0, MEDIUM). No patch available. [risk model confidence: 74%]"
+DEP-0068,APP-002,PaymentService,jackson-core,4.3.4,False,NONE,NONE,0.0,
+DEP-0069,APP-002,PaymentService,netty-all,5.4.7,True,LICENSE_CONFLICT,CRITICAL,8.0,AGPL-3.0 license is incompatible with proprietary app PaymentService.
+DEP-0070,APP-002,PaymentService,tomcat-embed-core,5.10.8,False,NONE,NONE,0.0,
+DEP-0071,APP-002,PaymentService,postgresql-jdbc,2.13.9,False,NONE,NONE,0.0,
+DEP-0072,APP-002,PaymentService,slf4j-api,2.5.8,False,NONE,NONE,0.0,
+DEP-0073,APP-002,PaymentService,micrometer-core,5.9.6,True,VULNERABLE_DEPENDENCY,MEDIUM,9.15,"micrometer-core:5.9.6 has CVE-2026-1050 (CVSS 6.1, MEDIUM). No patch available. [risk model confidence: 99%]"
+DEP-0074,APP-002,PaymentService,mapstruct,2.9.10,False,NONE,NONE,0.0,
+DEP-0075,APP-002,PaymentService,golangci-lint,4.3.9,False,NONE,NONE,0.0,
+DEP-0076,APP-002,PaymentService,hibernate-core,3.1.6,True,ELEVATED_RISK,LOW,1.5,"hibernate-core flagged by the risk model on combined signal strength (no single dominant factor -- age 614 days, exploitability/patch history considered together) [confidence: 80%]."
+DEP-0077,APP-002,PaymentService,jackson-databind,2.11.9,True,VULNERABLE_DEPENDENCY,MEDIUM,10.35,"jackson-databind:2.11.9 has CVE-2025-1003 (CVSS 6.9, MEDIUM). No patch available. [risk model confidence: 62%]"
+DEP-0078,APP-002,PaymentService,kafka-clients,1.10.7,False,NONE,NONE,0.0,
+DEP-0079,APP-002,PaymentService,log4j-api,5.11.1,True,VULNERABLE_DEPENDENCY,MEDIUM,9.45,"log4j-api:5.11.1 has CVE-2022-1041 (CVSS 6.3, MEDIUM). No patch available. [risk model confidence: 61%]"
+DEP-0080,APP-002,PaymentService,psycopg2,1.11.3,False,NONE,NONE,0.0,
+DEP-0081,APP-002,PaymentService,commons-collections4,3.14.3,False,NONE,NONE,0.0,
+DEP-0082,APP-002,PaymentService,junit-jupiter,5.9.0,False,NONE,NONE,0.0,
+DEP-0083,APP-002,PaymentService,jetty-server,2.10.8,False,NONE,NONE,0.0,
+DEP-0084,APP-002,PaymentService,mysql-connector-java,1.6.8,False,NONE,NONE,0.0,
+DEP-0085,APP-002,PaymentService,bouncycastle-bcprov,2.8.8,True,VULNERABLE_DEPENDENCY,MEDIUM,4.6,"bouncycastle-bcprov:2.8.8 has CVE-2025-1010 (CVSS 4.6, MEDIUM). Patched in 4.9.0. [risk model confidence: 88%]"
+DEP-0086,APP-002,PaymentService,h2-database,1.12.0,True,UNMAINTAINED,LOW,1.5,"h2-database last updated 2023-11-05, over 2 years old. [risk model confidence: 99%]"
+DEP-0087,APP-002,PaymentService,jackson-annotations,3.9.1,True,TRANSITIVE_VULNERABILITY,HIGH,6.0,"jackson-annotations:3.9.1 has CVE-2023-1017 (CVSS 8.0, HIGH). Patched in 5.5.0. Pulled in transitively via jackson-core:4.3.4, jackson-databind:2.11.9. [risk model confidence: 98%]"
+DEP-0088,APP-002,PaymentService,testify,2.2.6,True,TRANSITIVE_VULNERABILITY,CRITICAL,7.43,"testify:2.2.6 has CVE-2025-1043 (CVSS 9.9, CRITICAL). Patched in 2.11.0. Pulled in transitively via jackson-databind:2.11.9, mysql-connector-java:1.6.8. [risk model confidence: 92%]"
+DEP-0089,APP-002,PaymentService,morgan,3.0.8,True,TRANSITIVE_VULNERABILITY,MEDIUM,5.17,"morgan:3.0.8 has CVE-2025-1105 (CVSS 4.6, MEDIUM). No patch available. Pulled in transitively via jetty-server:2.10.8. [risk model confidence: 99%]"
+DEP-0090,APP-002,PaymentService,protobuf-java,3.3.5,False,NONE,NONE,0.0,
+DEP-0091,APP-002,PaymentService,disruptor,2.3.4,False,NONE,NONE,0.0,
+DEP-0092,APP-002,PaymentService,commons-lang3,4.10.8,True,UNMAINTAINED,LOW,1.5,"commons-lang3 last updated 2024-01-26, over 2 years old. [risk model confidence: 97%]"
+DEP-0093,APP-002,PaymentService,commons-codec,3.5.2,False,NONE,NONE,0.0,
+DEP-0094,APP-002,PaymentService,logback-classic,3.7.7,False,NONE,NONE,0.0,
+DEP-0095,APP-002,PaymentService,lombok,3.12.5,False,NONE,NONE,0.0,
+DEP-0096,APP-002,PaymentService,log4j-core,4.4.5,False,NONE,NONE,0.0,
+DEP-0097,APP-002,PaymentService,spring-core,3.7.8,False,NONE,NONE,0.0,
+DEP-0098,APP-002,PaymentService,aiohttp,2.4.1,False,NONE,NONE,0.0,
+DEP-0099,APP-002,PaymentService,netty-handler,4.12.3,True,TRANSITIVE_VULNERABILITY,MEDIUM,5.29,"netty-handler:4.12.3 has CVE-2024-1081 (CVSS 4.7, MEDIUM). No patch available. Pulled in transitively via jackson-databind:2.11.9. [risk model confidence: 85%]"
+DEP-0100,APP-002,PaymentService,bandit,3.6.3,True,TRANSITIVE_VULNERABILITY,HIGH,9.56,"bandit:3.6.3 has CVE-2024-1198 (CVSS 8.5, HIGH). No patch available. Pulled in transitively via postgresql-jdbc:2.13.9. [risk model confidence: 76%]"
+DEP-0101,APP-003,InternalAPI,requests,4.15.9,True,LICENSE_CONFLICT,CRITICAL,8.0,GPL-2.0 license is incompatible with proprietary app InternalAPI.
+DEP-0102,APP-003,InternalAPI,pip,2.4.2,True,VULNERABLE_DEPENDENCY,HIGH,8.6,"pip:2.4.2 has CVE-2024-1184 (CVSS 8.6, HIGH). Patched in 3.0.0. [risk model confidence: 77%]"
+DEP-0103,APP-003,InternalAPI,twisted,2.5.2,True,LICENSE_UNKNOWN,HIGH,3.0,twisted has no declared license — legal status unknown.
+DEP-0104,APP-003,InternalAPI,setuptools,2.12.9,False,NONE,NONE,0.0,
+DEP-0105,APP-003,InternalAPI,numpy,5.8.2,True,VULNERABLE_DEPENDENCY,HIGH,7.4,"numpy:5.8.2 has CVE-2022-1148 (CVSS 7.4, HIGH). Patched in 6.0.0. [risk model confidence: 99%]"
+DEP-0106,APP-003,InternalAPI,aws-sdk-s3,5.13.2,True,UNMAINTAINED,LOW,2.0,"aws-sdk-s3 last updated 2022-12-24, over 2 years old. [risk model confidence: 99%]"
+DEP-0107,APP-003,InternalAPI,junit-jupiter,4.13.5,False,NONE,NONE,0.0,
+DEP-0108,APP-003,InternalAPI,black,3.15.3,True,VULNERABLE_DEPENDENCY,MEDIUM,9.15,"black:3.15.3 has CVE-2024-1052 (CVSS 6.1, MEDIUM). No patch available. [risk model confidence: 58%]"
+DEP-0109,APP-003,InternalAPI,psycopg2,1.3.8,True,LICENSE_CONFLICT,CRITICAL,8.0,AGPL-3.0 license is incompatible with proprietary app InternalAPI.
+DEP-0110,APP-003,InternalAPI,pydantic,5.8.4,True,VULNERABLE_DEPENDENCY,HIGH,10.95,"pydantic:5.8.4 has CVE-2022-1181 (CVSS 7.3, HIGH). No patch available. [risk model confidence: 78%]"
+DEP-0111,APP-003,InternalAPI,log4j-api,2.3.3,True,VULNERABLE_DEPENDENCY,MEDIUM,9.45,"log4j-api:2.3.3 has CVE-2022-1041 (CVSS 6.3, MEDIUM). No patch available. [risk model confidence: 62%]"
+DEP-0112,APP-003,InternalAPI,paramiko,1.2.4,False,NONE,NONE,0.0,
+DEP-0113,APP-003,InternalAPI,markupsafe,2.15.7,True,LICENSE_CONFLICT,CRITICAL,8.0,AGPL-3.0 license is incompatible with proprietary app InternalAPI.
+DEP-0114,APP-003,InternalAPI,pandas,5.5.10,True,UNMAINTAINED,LOW,2.0,"pandas last updated 2021-07-19, over 2 years old. [risk model confidence: 99%]"
+DEP-0115,APP-003,InternalAPI,bandit,1.2.8,True,VULNERABLE_DEPENDENCY,HIGH,12.75,"bandit:1.2.8 has CVE-2024-1198 (CVSS 8.5, HIGH). No patch available. [risk model confidence: 57%]"
+DEP-0116,APP-003,InternalAPI,cryptography,4.12.9,True,LICENSE_CONFLICT,CRITICAL,8.0,GPL-2.0 license is incompatible with proprietary app InternalAPI.
+DEP-0117,APP-003,InternalAPI,sqlalchemy,5.8.8,True,VULNERABLE_DEPENDENCY,LOW,4.65,"sqlalchemy:5.8.8 has CVE-2024-1183 (CVSS 3.1, LOW). No patch available. [risk model confidence: 75%]"
+DEP-0118,APP-003,InternalAPI,redis-py,2.10.6,False,NONE,NONE,0.0,
+DEP-0119,APP-003,InternalAPI,pyyaml,2.15.5,True,VULNERABLE_DEPENDENCY,CRITICAL,9.3,"pyyaml:2.15.5 has CVE-2022-1069 (CVSS 9.3, CRITICAL). Patched in 5.10.0. [risk model confidence: 91%]"
+DEP-0120,APP-003,InternalAPI,node-fetch,2.11.2,False,NONE,NONE,0.0,
+DEP-0121,APP-003,InternalAPI,httpx,4.5.8,True,VULNERABLE_DEPENDENCY,CRITICAL,9.7,"httpx:4.5.8 has CVE-2023-1097 (CVSS 9.7, CRITICAL). Patched in 4.7.0. [risk model confidence: 94%]"
+DEP-0122,APP-003,InternalAPI,coverage,2.14.1,False,NONE,NONE,0.0,
+DEP-0123,APP-003,InternalAPI,zap,2.8.3,True,VULNERABLE_DEPENDENCY,CRITICAL,9.5,"zap:2.8.3 has CVE-2021-1014 (CVSS 9.5, CRITICAL). Patched in 5.3.0. [risk model confidence: 75%]"
+DEP-0124,APP-003,InternalAPI,fastapi,5.4.9,False,NONE,NONE,0.0,
+DEP-0125,APP-003,InternalAPI,mocha,2.10.7,True,UNMAINTAINED,LOW,2.0,"mocha last updated 2020-11-30, over 2 years old. [risk model confidence: 99%]"
+DEP-0126,APP-003,InternalAPI,jinja2,3.15.10,False,NONE,NONE,0.0,
+DEP-0127,APP-003,InternalAPI,python-dateutil,5.6.9,False,NONE,NONE,0.0,
+DEP-0128,APP-003,InternalAPI,flask,5.9.7,False,NONE,NONE,0.0,
+DEP-0129,APP-003,InternalAPI,wheel,2.10.3,False,NONE,NONE,0.0,
+DEP-0130,APP-003,InternalAPI,certifi,2.0.2,True,VULNERABLE_DEPENDENCY,LOW,1.4,"certifi:2.0.2 has CVE-2022-1168 (CVSS 1.4, LOW). Patched in 3.0.0. [risk model confidence: 82%]"
+DEP-0131,APP-003,InternalAPI,botocore,4.1.0,False,NONE,NONE,0.0,
+DEP-0132,APP-003,InternalAPI,rich,4.9.3,False,NONE,NONE,0.0,
+DEP-0133,APP-003,InternalAPI,ansible-core,3.10.7,True,VULNERABLE_DEPENDENCY,MEDIUM,9.45,"ansible-core:3.10.7 has CVE-2025-1141 (CVSS 6.3, MEDIUM). No patch available. [risk model confidence: 74%]"
+DEP-0134,APP-003,InternalAPI,pyjwt,5.13.8,True,VULNERABLE_DEPENDENCY,HIGH,10.95,"pyjwt:5.13.8 has CVE-2025-1123 (CVSS 7.3, HIGH). No patch available. [risk model confidence: 86%]"
+DEP-0135,APP-003,InternalAPI,fabric,5.4.5,False,NONE,NONE,0.0,
+DEP-0136,APP-003,InternalAPI,colly,3.9.3,False,NONE,NONE,0.0,
+DEP-0137,APP-003,InternalAPI,click,4.6.3,True,TRANSITIVE_VULNERABILITY,MEDIUM,6.75,"click:4.6.3 has CVE-2024-1039 (CVSS 6.0, MEDIUM). No patch available. Pulled in transitively via numpy:5.8.2, aws-sdk-s3:5.13.2, psycopg2:1.3.8. [risk model confidence: 77%]"
+DEP-0138,APP-003,InternalAPI,celery,2.8.4,False,NONE,NONE,0.0,
+DEP-0139,APP-003,InternalAPI,uvicorn,2.2.4,False,NONE,NONE,0.0,
+DEP-0140,APP-003,InternalAPI,safety,4.3.5,True,TRANSITIVE_LICENSE_CONFLICT,CRITICAL,6.0,GPL-2.0 license is incompatible with proprietary app InternalAPI.
+DEP-0141,APP-003,InternalAPI,idna,2.1.4,True,TRANSITIVE_VULNERABILITY,MEDIUM,4.12,"idna:2.1.4 has CVE-2021-1088 (CVSS 5.5, MEDIUM). Patched in 5.6.0. Pulled in transitively via pandas:5.5.10, coverage:2.14.1, pyjwt:5.13.8. [risk model confidence: 100%]"
+DEP-0142,APP-003,InternalAPI,boto3,2.5.6,True,TRANSITIVE_VULNERABILITY,MEDIUM,4.65,"boto3:2.5.6 has CVE-2025-1155 (CVSS 6.2, MEDIUM). Patched in 4.0.0. Pulled in transitively via pydantic:5.8.4, jinja2:3.15.10. [risk model confidence: 81%]"
+DEP-0143,APP-003,InternalAPI,django,1.4.6,False,NONE,NONE,0.0,
+DEP-0144,APP-003,InternalAPI,werkzeug,1.1.3,True,TRANSITIVE_VULNERABILITY,MEDIUM,6.3,"werkzeug:1.1.3 has CVE-2024-1004 (CVSS 5.6, MEDIUM). No patch available. Pulled in transitively via pydantic:5.8.4, paramiko:1.2.4, cryptography:4.12.9, node-fetch:2.11.2, httpx:4.5.8. [risk model confidence: 96%]"
+DEP-0145,APP-003,InternalAPI,urllib3,2.7.6,True,TRANSITIVE_VULNERABILITY,MEDIUM,4.5,"urllib3:2.7.6 has CVE-2023-1140 (CVSS 6.0, MEDIUM). Patched in 3.0.0. Pulled in transitively via setuptools:2.12.9, log4j-api:2.3.3, flask:5.9.7. [risk model confidence: 99%]"
+DEP-0146,APP-003,InternalAPI,scikit-learn,3.7.4,True,TRANSITIVE_VULNERABILITY,MEDIUM,3.82,"scikit-learn:3.7.4 has CVE-2022-1008 (CVSS 5.1, MEDIUM). Patched in 4.3.0. Pulled in transitively via pip:2.4.2, pandas:5.5.10. [risk model confidence: 63%]"
+DEP-0147,APP-003,InternalAPI,gunicorn,3.0.2,False,NONE,NONE,0.0,
+DEP-0148,APP-003,InternalAPI,go-redis,4.11.2,True,TRANSITIVE_VULNERABILITY,HIGH,9.45,"go-redis:4.11.2 has CVE-2024-1128 (CVSS 8.4, HIGH). No patch available. Pulled in transitively via junit-jupiter:4.13.5, sqlalchemy:5.8.8, zap:2.8.3, wheel:2.10.3. [risk model confidence: 93%]"
+DEP-0149,APP-003,InternalAPI,pytest,1.5.2,False,NONE,NONE,0.0,
+DEP-0150,APP-003,InternalAPI,pillow,3.12.7,True,LICENSE_UNKNOWN,HIGH,2.25,pillow has no declared license — legal status unknown.
+DEP-0151,APP-004,HRPortal,coverage,5.12.10,False,NONE,NONE,0.0,
+DEP-0152,APP-004,HRPortal,morgan,4.11.0,False,NONE,NONE,0.0,
+DEP-0153,APP-004,HRPortal,sqlalchemy,5.13.1,True,VULNERABLE_DEPENDENCY,LOW,4.65,"sqlalchemy:5.13.1 has CVE-2024-1183 (CVSS 3.1, LOW). No patch available. [risk model confidence: 76%]"
+DEP-0154,APP-004,HRPortal,paramiko,5.10.10,False,NONE,NONE,0.0,
+DEP-0155,APP-004,HRPortal,gunicorn,3.11.7,False,NONE,NONE,0.0,
+DEP-0156,APP-004,HRPortal,numpy,1.9.3,True,VULNERABLE_DEPENDENCY,HIGH,7.4,"numpy:1.9.3 has CVE-2022-1148 (CVSS 7.4, HIGH). Patched in 6.0.0. [risk model confidence: 74%]"
+DEP-0157,APP-004,HRPortal,pytest,2.8.5,True,UNMAINTAINED,LOW,2.0,"pytest last updated 2022-03-29, over 2 years old. [risk model confidence: 99%]"
+DEP-0158,APP-004,HRPortal,python-dateutil,2.15.9,False,NONE,NONE,0.0,
+DEP-0159,APP-004,HRPortal,cors,4.13.1,False,NONE,NONE,0.0,
+DEP-0160,APP-004,HRPortal,django,2.10.8,False,NONE,NONE,0.0,
+DEP-0161,APP-004,HRPortal,mypy,2.4.5,True,VULNERABLE_DEPENDENCY,MEDIUM,4.7,"mypy:2.4.5 has CVE-2022-1175 (CVSS 4.7, MEDIUM). Patched in 5.0.0. [risk model confidence: 83%]"
+DEP-0162,APP-004,HRPortal,boto3,4.6.8,True,ELEVATED_RISK,LOW,1.5,"boto3 flagged by the risk model on combined signal strength (no single dominant factor -- age 229 days, exploitability/patch history considered together) [confidence: 60%]."
+DEP-0163,APP-004,HRPortal,httpx,3.6.5,True,VULNERABLE_DEPENDENCY,CRITICAL,9.7,"httpx:3.6.5 has CVE-2023-1097 (CVSS 9.7, CRITICAL). Patched in 4.7.0. [risk model confidence: 97%]"
+DEP-0164,APP-004,HRPortal,scipy,1.3.0,True,VULNERABLE_DEPENDENCY,LOW,2.7,"scipy:1.3.0 has CVE-2022-1036 (CVSS 1.8, LOW). No patch available. [risk model confidence: 92%]"
+DEP-0165,APP-004,HRPortal,moment,2.6.3,False,NONE,NONE,0.0,
+DEP-0166,APP-004,HRPortal,fastapi,5.1.4,False,NONE,NONE,0.0,
+DEP-0167,APP-004,HRPortal,twisted,3.11.1,True,LICENSE_CONFLICT,CRITICAL,8.0,AGPL-3.0 license is incompatible with proprietary app HRPortal.
+DEP-0168,APP-004,HRPortal,pyjwt,5.2.2,True,VULNERABLE_DEPENDENCY,HIGH,10.95,"pyjwt:5.2.2 has CVE-2025-1123 (CVSS 7.3, HIGH). No patch available. [risk model confidence: 100%]"
+DEP-0169,APP-004,HRPortal,uuid,1.8.6,False,NONE,NONE,0.0,
+DEP-0170,APP-004,HRPortal,formidable,4.4.1,False,NONE,NONE,0.0,
+DEP-0171,APP-004,HRPortal,pyyaml,5.10.7,True,VULNERABLE_DEPENDENCY,MEDIUM,9.45,"pyyaml:5.10.7 has CVE-2026-1067 (CVSS 6.3, MEDIUM). No patch available. [risk model confidence: 95%]"
+DEP-0172,APP-004,HRPortal,idna,2.10.2,True,VULNERABLE_DEPENDENCY,MEDIUM,5.5,"idna:2.10.2 has CVE-2021-1088 (CVSS 5.5, MEDIUM). Patched in 5.6.0. [risk model confidence: 88%]"
+DEP-0173,APP-004,HRPortal,bandit,1.8.9,True,VULNERABLE_DEPENDENCY,HIGH,12.75,"bandit:1.8.9 has CVE-2024-1198 (CVSS 8.5, HIGH). No patch available. [risk model confidence: 99%]"
+DEP-0174,APP-004,HRPortal,ansible-core,3.5.6,False,NONE,NONE,0.0,
+DEP-0175,APP-004,HRPortal,urllib3,4.12.0,True,ELEVATED_RISK,LOW,1.5,"urllib3 flagged by the risk model on combined signal strength (no single dominant factor -- age 84 days, exploitability/patch history considered together) [confidence: 64%]."
+DEP-0176,APP-004,HRPortal,aiohttp,2.12.0,True,VULNERABLE_DEPENDENCY,HIGH,8.3,"aiohttp:2.12.0 has CVE-2022-1064 (CVSS 8.3, HIGH). Patched in 5.11.0. [risk model confidence: 56%]"
+DEP-0177,APP-004,HRPortal,pandas,5.4.7,False,NONE,NONE,0.0,
+DEP-0178,APP-004,HRPortal,cryptography,2.14.1,False,NONE,NONE,0.0,
+DEP-0179,APP-004,HRPortal,pydantic,4.11.1,True,VULNERABLE_DEPENDENCY,HIGH,10.95,"pydantic:4.11.1 has CVE-2022-1181 (CVSS 7.3, HIGH). No patch available. [risk model confidence: 73%]"
+DEP-0180,APP-004,HRPortal,caffeine,2.4.2,True,VULNERABLE_DEPENDENCY,MEDIUM,5.5,"caffeine:2.4.2 has CVE-2022-1085 (CVSS 5.5, MEDIUM). Patched in 4.7.0. [risk model confidence: 92%]"
+DEP-0181,APP-004,HRPortal,markupsafe,2.0.9,True,LICENSE_UNKNOWN,HIGH,3.0,markupsafe has no declared license — legal status unknown.
+DEP-0182,APP-004,HRPortal,typescript,4.13.7,True,VULNERABLE_DEPENDENCY,MEDIUM,5.3,"typescript:4.13.7 has CVE-2026-1092 (CVSS 5.3, MEDIUM). Patched in 5.8.0. [risk model confidence: 87%]"
+DEP-0183,APP-004,HRPortal,hibernate-validator,1.4.0,True,VULNERABLE_DEPENDENCY,CRITICAL,9.7,"hibernate-validator:1.4.0 has CVE-2024-1060 (CVSS 9.7, CRITICAL). Patched in 2.8.0. [risk model confidence: 100%]"
+DEP-0184,APP-004,HRPortal,botocore,1.13.8,False,NONE,NONE,0.0,
+DEP-0185,APP-004,HRPortal,safety,1.2.7,False,NONE,NONE,0.0,
+DEP-0186,APP-004,HRPortal,flask,4.7.2,False,NONE,NONE,0.0,
+DEP-0187,APP-004,HRPortal,pillow,1.0.7,False,NONE,NONE,0.0,
+DEP-0188,APP-004,HRPortal,rich,4.0.5,True,UNMAINTAINED,LOW,1.5,"rich last updated 2021-02-16, over 2 years old. [risk model confidence: 99%]"
+DEP-0189,APP-004,HRPortal,charset-normalizer,3.4.1,False,NONE,NONE,0.0,
+DEP-0190,APP-004,HRPortal,requests,3.6.0,True,TRANSITIVE_VULNERABILITY,MEDIUM,5.51,"requests:3.6.0 has CVE-2023-1124 (CVSS 4.9, MEDIUM). No patch available. Pulled in transitively via pyjwt:5.2.2, pyyaml:5.10.7, aiohttp:2.12.0, hibernate-validator:1.4.0, safety:1.2.7. [risk model confidence: 95%]"
+DEP-0191,APP-004,HRPortal,bcrypt,1.10.2,True,TRANSITIVE_VULNERABILITY,CRITICAL,10.58,"bcrypt:1.10.2 has CVE-2023-1074 (CVSS 9.4, CRITICAL). No patch available. Pulled in transitively via paramiko:5.10.10, pyjwt:5.2.2. [risk model confidence: 85%]"
+DEP-0192,APP-004,HRPortal,click,1.8.4,False,NONE,NONE,0.0,
+DEP-0193,APP-004,HRPortal,hibernate-core,3.12.5,True,UNMAINTAINED,LOW,1.5,"hibernate-core last updated 2022-02-07, over 2 years old. [risk model confidence: 100%]"
+DEP-0194,APP-004,HRPortal,celery,2.9.6,False,NONE,NONE,0.0,
+DEP-0195,APP-004,HRPortal,psycopg2,3.6.1,False,NONE,NONE,0.0,
+DEP-0196,APP-004,HRPortal,six,2.8.4,True,TRANSITIVE_VULNERABILITY,MEDIUM,4.5,"six:2.8.4 has CVE-2023-1162 (CVSS 6.0, MEDIUM). Patched in 4.0.0. Pulled in transitively via moment:2.6.3, hibernate-validator:1.4.0. [risk model confidence: 88%]"
+DEP-0197,APP-004,HRPortal,scikit-learn,4.8.2,False,NONE,NONE,0.0,
+DEP-0198,APP-004,HRPortal,setuptools,2.12.1,False,NONE,NONE,0.0,
+DEP-0199,APP-004,HRPortal,uvicorn,4.6.8,False,NONE,NONE,0.0,
+DEP-0200,APP-004,HRPortal,matplotlib,1.5.7,False,NONE,NONE,0.0,
+DEP-0201,APP-005,AnalyticsDashboard,moment,1.14.1,False,NONE,NONE,0.0,
+DEP-0202,APP-005,AnalyticsDashboard,formidable,5.8.5,False,NONE,NONE,0.0,
+DEP-0203,APP-005,AnalyticsDashboard,cheerio,3.15.7,True,UNMAINTAINED,LOW,2.0,"cheerio last updated 2020-07-29, over 2 years old. [risk model confidence: 99%]"
+DEP-0204,APP-005,AnalyticsDashboard,bcrypt,1.9.8,False,NONE,NONE,0.0,
+DEP-0205,APP-005,AnalyticsDashboard,mocha,4.10.8,False,NONE,NONE,0.0,
+DEP-0206,APP-005,AnalyticsDashboard,nanoid,3.12.1,False,NONE,NONE,0.0,
+DEP-0207,APP-005,AnalyticsDashboard,winston,1.4.10,True,VULNERABLE_DEPENDENCY,LOW,3.6,"winston:1.4.10 has CVE-2023-1150 (CVSS 3.6, LOW). Patched in 3.0.0. [risk model confidence: 74%]"
+DEP-0208,APP-005,AnalyticsDashboard,sequelize,3.2.9,True,LICENSE_CONFLICT,CRITICAL,8.0,AGPL-3.0 license is incompatible with proprietary app AnalyticsDashboard.
+DEP-0209,APP-005,AnalyticsDashboard,commander,2.13.9,True,VULNERABLE_DEPENDENCY,CRITICAL,9.5,"commander:2.13.9 has CVE-2024-1126 (CVSS 9.5, CRITICAL). Patched in 4.0.0. [risk model confidence: 72%]"
+DEP-0210,APP-005,AnalyticsDashboard,dotenv,4.4.4,False,NONE,NONE,0.0,
+DEP-0211,APP-005,AnalyticsDashboard,setuptools,5.13.9,False,NONE,NONE,0.0,
+DEP-0212,APP-005,AnalyticsDashboard,babel-core,5.15.3,True,VULNERABLE_DEPENDENCY,CRITICAL,9.8,"babel-core:5.15.3 has CVE-2025-1106 (CVSS 9.8, CRITICAL). Patched in 6.0.0. [risk model confidence: 93%]"
+DEP-0213,APP-005,AnalyticsDashboard,node-fetch,2.8.7,False,NONE,NONE,0.0,
+DEP-0214,APP-005,AnalyticsDashboard,morgan,5.10.6,True,VULNERABLE_DEPENDENCY,MEDIUM,6.9,"morgan:5.10.6 has CVE-2025-1105 (CVSS 4.6, MEDIUM). No patch available. [risk model confidence: 99%]"
+DEP-0215,APP-005,AnalyticsDashboard,multer,5.0.4,False,NONE,NONE,0.0,
+DEP-0216,APP-005,AnalyticsDashboard,mongoose,1.3.9,False,NONE,NONE,0.0,
+DEP-0217,APP-005,AnalyticsDashboard,nodemon,2.15.2,False,NONE,NONE,0.0,
+DEP-0218,APP-005,AnalyticsDashboard,eslint,1.8.1,False,NONE,NONE,0.0,
+DEP-0219,APP-005,AnalyticsDashboard,next,4.15.4,False,NONE,NONE,0.0,
+DEP-0220,APP-005,AnalyticsDashboard,cors,5.12.7,False,NONE,NONE,0.0,
+DEP-0221,APP-005,AnalyticsDashboard,knex,1.0.1,True,LICENSE_CONFLICT,CRITICAL,8.0,GPL-2.0 license is incompatible with proprietary app AnalyticsDashboard.
+DEP-0222,APP-005,AnalyticsDashboard,chalk,1.0.9,True,VULNERABLE_DEPENDENCY,LOW,1.2,"chalk:1.0.9 has CVE-2022-1170 (CVSS 1.2, LOW). Patched in 4.0.0. [risk model confidence: 91%]"
+DEP-0223,APP-005,AnalyticsDashboard,vue,1.5.4,False,NONE,NONE,0.0,
+DEP-0224,APP-005,AnalyticsDashboard,react,4.12.5,False,NONE,NONE,0.0,
+DEP-0225,APP-005,AnalyticsDashboard,typescript,4.8.1,False,NONE,NONE,0.0,
+DEP-0226,APP-005,AnalyticsDashboard,puppeteer,1.12.4,False,NONE,NONE,0.0,
+DEP-0227,APP-005,AnalyticsDashboard,inquirer,1.12.7,False,NONE,NONE,0.0,
+DEP-0228,APP-005,AnalyticsDashboard,passport,1.11.8,False,NONE,NONE,0.0,
+DEP-0229,APP-005,AnalyticsDashboard,apollo-server,5.1.6,True,VULNERABLE_DEPENDENCY,HIGH,7.3,"apollo-server:5.1.6 has CVE-2026-1029 (CVSS 7.3, HIGH). Patched in 5.5.0. [risk model confidence: 56%]"
+DEP-0230,APP-005,AnalyticsDashboard,react-dom,5.7.7,True,VULNERABLE_DEPENDENCY,HIGH,10.8,"react-dom:5.7.7 has CVE-2022-1166 (CVSS 7.2, HIGH). No patch available. [risk model confidence: 77%]"
+DEP-0231,APP-005,AnalyticsDashboard,angular-core,5.4.9,False,NONE,NONE,0.0,
+DEP-0232,APP-005,AnalyticsDashboard,jest,5.2.1,False,NONE,NONE,0.0,
+DEP-0233,APP-005,AnalyticsDashboard,hibernate-validator,5.4.5,True,VULNERABLE_DEPENDENCY,MEDIUM,7.8,"hibernate-validator:5.4.5 has CVE-2021-1061 (CVSS 5.2, MEDIUM). No patch available. [risk model confidence: 89%]"
+DEP-0234,APP-005,AnalyticsDashboard,spring-boot-starter,2.11.8,True,UNMAINTAINED,LOW,2.0,"spring-boot-starter last updated 2023-07-18, over 2 years old. [risk model confidence: 99%]"
+DEP-0235,APP-005,AnalyticsDashboard,yargs,1.0.0,False,NONE,NONE,0.0,
+DEP-0236,APP-005,AnalyticsDashboard,postgresql-jdbc,4.6.3,False,NONE,NONE,0.0,
+DEP-0237,APP-005,AnalyticsDashboard,micrometer-core,1.10.4,True,LICENSE_UNKNOWN,HIGH,2.25,micrometer-core has no declared license — legal status unknown.
+DEP-0238,APP-005,AnalyticsDashboard,helmet,1.9.5,False,NONE,NONE,0.0,
+DEP-0239,APP-005,AnalyticsDashboard,protobuf-java,2.4.0,False,NONE,NONE,0.0,
+DEP-0240,APP-005,AnalyticsDashboard,prettier,4.2.2,True,TRANSITIVE_VULNERABILITY,MEDIUM,6.3,"prettier:4.2.2 has CVE-2023-1187 (CVSS 5.6, MEDIUM). No patch available. [risk model confidence: 94%]"
+DEP-0241,APP-005,AnalyticsDashboard,axios,4.0.1,True,TRANSITIVE_VULNERABILITY,MEDIUM,4.73,"axios:4.0.1 has CVE-2022-1196 (CVSS 4.2, MEDIUM). No patch available. Pulled in transitively via bcrypt:1.9.8, winston:1.4.10, sequelize:3.2.9, react-dom:5.7.7. [risk model confidence: 99%]"
+DEP-0242,APP-005,AnalyticsDashboard,graphql,1.3.7,True,TRANSITIVE_VULNERABILITY,LOW,0.52,"graphql:1.3.7 has CVE-2025-1158 (CVSS 0.7, LOW). Patched in 5.0.0. Pulled in transitively via react:4.12.5, puppeteer:1.12.4. [risk model confidence: 95%]"
+DEP-0243,APP-005,AnalyticsDashboard,bull,3.3.1,True,ELEVATED_RISK,LOW,1.12,"bull flagged by the risk model on combined signal strength (no single dominant factor -- age 444 days, exploitability/patch history considered together) [confidence: 71%]."
+DEP-0244,APP-005,AnalyticsDashboard,sharp,1.6.2,True,TRANSITIVE_VULNERABILITY,HIGH,5.47,"sharp:1.6.2 has CVE-2024-1099 (CVSS 7.3, HIGH). Patched in 5.13.0. [risk model confidence: 61%]"
+DEP-0245,APP-005,AnalyticsDashboard,express,3.4.3,True,TRANSITIVE_VULNERABILITY,MEDIUM,6.19,"express:3.4.3 has CVE-2022-1171 (CVSS 5.5, MEDIUM). No patch available. Pulled in transitively via mocha:4.10.8, react:4.12.5, angular-core:5.4.9. [risk model confidence: 99%]"
+DEP-0246,APP-005,AnalyticsDashboard,echo,4.6.2,False,NONE,NONE,0.0,
+DEP-0247,APP-005,AnalyticsDashboard,testify,2.9.8,False,NONE,NONE,0.0,
+DEP-0248,APP-005,AnalyticsDashboard,webpack,4.4.0,False,NONE,NONE,0.0,
+DEP-0249,APP-005,AnalyticsDashboard,dayjs,2.9.0,False,NONE,NONE,0.0,
+DEP-0250,APP-005,AnalyticsDashboard,mysql-connector-java,1.6.8,False,NONE,NONE,0.0,
+DEP-0251,APP-006,MobileBackend,zap,4.6.3,False,NONE,NONE,0.0,
+DEP-0252,APP-006,MobileBackend,protobuf-go,4.9.7,False,NONE,NONE,0.0,
+DEP-0253,APP-006,MobileBackend,sarama,4.2.1,True,UNMAINTAINED,LOW,2.0,"sarama last updated 2021-07-19, over 2 years old. [risk model confidence: 99%]"
+DEP-0254,APP-006,MobileBackend,pyjwt,2.0.4,True,VULNERABLE_DEPENDENCY,HIGH,10.95,"pyjwt:2.0.4 has CVE-2025-1123 (CVSS 7.3, HIGH). No patch available. [risk model confidence: 89%]"
+DEP-0255,APP-006,MobileBackend,moment,3.15.9,False,NONE,NONE,0.0,
+DEP-0256,APP-006,MobileBackend,testify,2.11.4,True,VULNERABLE_DEPENDENCY,HIGH,7.7,"testify:2.11.4 has CVE-2026-1044 (CVSS 7.7, HIGH). Patched in 5.8.0. [risk model confidence: 92%]"
+DEP-0257,APP-006,MobileBackend,crypto-go,5.1.10,False,NONE,NONE,0.0,
+DEP-0258,APP-006,MobileBackend,python-dateutil,2.14.5,False,NONE,NONE,0.0,
+DEP-0259,APP-006,MobileBackend,mux,4.10.1,True,VULNERABLE_DEPENDENCY,MEDIUM,6.5,"mux:4.10.1 has CVE-2022-1199 (CVSS 6.5, MEDIUM). Patched in 6.0.0. [risk model confidence: 99%]"
+DEP-0260,APP-006,MobileBackend,logrus,5.6.9,True,UNMAINTAINED,LOW,2.0,"logrus last updated 2023-01-07, over 2 years old. [risk model confidence: 99%]"
+DEP-0261,APP-006,MobileBackend,gorm,5.1.10,True,ELEVATED_RISK,LOW,1.5,"gorm flagged by the risk model on combined signal strength (no single dominant factor -- age 657 days, exploitability/patch history considered together) [confidence: 92%]."
+DEP-0262,APP-006,MobileBackend,go-jwt,5.2.3,False,NONE,NONE,0.0,
+DEP-0263,APP-006,MobileBackend,aws-sdk-go,1.12.1,True,LICENSE_CONFLICT,CRITICAL,8.0,AGPL-3.0 license is incompatible with proprietary app MobileBackend.
+DEP-0264,APP-006,MobileBackend,viper,2.6.2,False,NONE,NONE,0.0,
+DEP-0265,APP-006,MobileBackend,resty,1.4.4,False,NONE,NONE,0.0,
+DEP-0266,APP-006,MobileBackend,gson,4.2.9,False,NONE,NONE,0.0,
+DEP-0267,APP-006,MobileBackend,spring-core,2.1.4,False,NONE,NONE,0.0,
+DEP-0268,APP-006,MobileBackend,yaml-go,1.5.8,True,VULNERABLE_DEPENDENCY,HIGH,7.8,"yaml-go:1.5.8 has CVE-2024-1112 (CVSS 7.8, HIGH). Patched in 2.0.0. [risk model confidence: 84%]"
+DEP-0269,APP-006,MobileBackend,fiber,1.4.8,True,UNMAINTAINED,LOW,2.0,"fiber last updated 2020-11-12, over 2 years old. [risk model confidence: 99%]"
+DEP-0270,APP-006,MobileBackend,gin,5.3.6,False,NONE,NONE,0.0,
+DEP-0271,APP-006,MobileBackend,json-iterator,3.5.4,True,LICENSE_CONFLICT,CRITICAL,8.0,GPL-2.0 license is incompatible with proprietary app MobileBackend.
+DEP-0272,APP-006,MobileBackend,numpy,4.3.1,True,LICENSE_CONFLICT,CRITICAL,8.0,GPL-3.0 license is incompatible with proprietary app MobileBackend.
+DEP-0273,APP-006,MobileBackend,golangci-lint,5.1.7,True,UNMAINTAINED,LOW,2.0,"golangci-lint last updated 2020-07-16, over 2 years old. [risk model confidence: 99%]"
+DEP-0274,APP-006,MobileBackend,pgx,1.2.2,False,NONE,NONE,0.0,
+DEP-0275,APP-006,MobileBackend,aiohttp,2.9.2,False,NONE,NONE,0.0,
+DEP-0276,APP-006,MobileBackend,go-redis,4.6.8,False,NONE,NONE,0.0,
+DEP-0277,APP-006,MobileBackend,bcrypt-go,3.1.1,True,VULNERABLE_DEPENDENCY,MEDIUM,6.0,"bcrypt-go:3.1.1 has CVE-2023-1054 (CVSS 6.0, MEDIUM). Patched in 4.9.0. [risk model confidence: 79%]"
+DEP-0278,APP-006,MobileBackend,fasthttp,2.2.7,True,VULNERABLE_DEPENDENCY,MEDIUM,10.35,"fasthttp:2.2.7 has CVE-2021-1031 (CVSS 6.9, MEDIUM). No patch available. [risk model confidence: 75%]"
+DEP-0279,APP-006,MobileBackend,chi,2.2.5,True,UNMAINTAINED,LOW,2.0,"chi last updated 2022-05-19, over 2 years old. [risk model confidence: 99%]"
+DEP-0280,APP-006,MobileBackend,uuid-go,5.12.7,False,NONE,NONE,0.0,
+DEP-0281,APP-006,MobileBackend,nats,1.3.0,False,NONE,NONE,0.0,
+DEP-0282,APP-006,MobileBackend,yargs,1.2.10,False,NONE,NONE,0.0,
+DEP-0283,APP-006,MobileBackend,tomcat-embed-core,1.1.6,False,NONE,NONE,0.0,
+DEP-0284,APP-006,MobileBackend,colly,2.9.2,False,NONE,NONE,0.0,
+DEP-0285,APP-006,MobileBackend,sqlx,2.1.6,True,VULNERABLE_DEPENDENCY,MEDIUM,9.3,"sqlx:2.1.6 has CVE-2022-1030 (CVSS 6.2, MEDIUM). No patch available. [risk model confidence: 81%]"
+DEP-0286,APP-006,MobileBackend,react-dom,3.6.1,True,TRANSITIVE_VULNERABILITY,HIGH,6.23,"react-dom:3.6.1 has CVE-2025-1179 (CVSS 8.3, HIGH). Patched in 4.0.0. Pulled in transitively via pyjwt:2.0.4, sqlx:2.1.6. [risk model confidence: 89%]"
+DEP-0287,APP-006,MobileBackend,paramiko,3.9.1,True,TRANSITIVE_VULNERABILITY,HIGH,6.0,"paramiko:3.9.1 has CVE-2023-1127 (CVSS 8.0, HIGH). Patched in 6.0.0. Pulled in transitively via gson:4.2.9, spring-core:2.1.4. [risk model confidence: 99%]"
+DEP-0288,APP-006,MobileBackend,cors,1.7.6,True,UNMAINTAINED,LOW,1.5,"cors last updated 2022-08-19, over 2 years old. [risk model confidence: 99%]"
+DEP-0289,APP-006,MobileBackend,nats,1.5.6,False,NONE,NONE,0.0,
+DEP-0290,APP-006,MobileBackend,commons-lang3,2.5.7,True,UNMAINTAINED,LOW,1.5,"commons-lang3 last updated 2021-09-05, over 2 years old. [risk model confidence: 97%]"
+DEP-0291,APP-006,MobileBackend,jedis,2.7.1,False,NONE,NONE,0.0,
+DEP-0292,APP-006,MobileBackend,go-jwt,4.12.3,False,NONE,NONE,0.0,
+DEP-0293,APP-006,MobileBackend,inquirer,3.1.8,True,TRANSITIVE_VULNERABILITY,LOW,0.75,"inquirer:3.1.8 has CVE-2022-1032 (CVSS 1.0, LOW). Patched in 4.4.0. Pulled in transitively via zap:4.6.3, resty:1.4.4, aiohttp:2.9.2. [risk model confidence: 100%]"
+DEP-0294,APP-006,MobileBackend,logback-classic,4.10.8,False,NONE,NONE,0.0,
+DEP-0295,APP-006,MobileBackend,uvicorn,2.0.8,False,NONE,NONE,0.0,
+DEP-0296,APP-006,MobileBackend,bouncycastle-bcprov,3.10.8,True,TRANSITIVE_VULNERABILITY,MEDIUM,3.45,"bouncycastle-bcprov:3.10.8 has CVE-2025-1010 (CVSS 4.6, MEDIUM). Patched in 4.9.0. Pulled in transitively via logrus:5.6.9, colly:2.9.2. [risk model confidence: 88%]"
+DEP-0297,APP-006,MobileBackend,coverage,3.7.2,False,NONE,NONE,0.0,
+DEP-0298,APP-006,MobileBackend,pyjwt,4.5.1,True,TRANSITIVE_VULNERABILITY,HIGH,8.21,"pyjwt:4.5.1 has CVE-2025-1123 (CVSS 7.3, HIGH). No patch available. Pulled in transitively via chi:2.2.5. [risk model confidence: 96%]"
+DEP-0299,APP-006,MobileBackend,uuid,4.3.1,True,LICENSE_UNKNOWN,HIGH,2.25,uuid has no declared license — legal status unknown.
+DEP-0300,APP-006,MobileBackend,mapstruct,4.7.8,False,NONE,NONE,0.0,
+DEP-0301,APP-007,DevToolkit,pillow,4.7.4,False,NONE,NONE,0.0,
+DEP-0302,APP-007,DevToolkit,viper,5.1.10,False,NONE,NONE,0.0,
+DEP-0303,APP-007,DevToolkit,boto3,5.7.7,True,ELEVATED_RISK,LOW,1.5,"boto3 flagged by the risk model on combined signal strength (no single dominant factor -- age 428 days, exploitability/patch history considered together) [confidence: 65%]."
+DEP-0304,APP-007,DevToolkit,logback-classic,2.14.10,True,UNMAINTAINED,LOW,2.0,"logback-classic last updated 2020-06-13, over 2 years old. [risk model confidence: 99%]"
+DEP-0305,APP-007,DevToolkit,mypy,3.2.5,True,VULNERABLE_DEPENDENCY,MEDIUM,4.7,"mypy:3.2.5 has CVE-2022-1175 (CVSS 4.7, MEDIUM). Patched in 5.0.0. [risk model confidence: 91%]"
+DEP-0306,APP-007,DevToolkit,certifi,3.2.1,False,NONE,NONE,0.0,
+DEP-0307,APP-007,DevToolkit,twisted,3.9.3,False,NONE,NONE,0.0,
+DEP-0308,APP-007,DevToolkit,markupsafe,1.7.1,True,VULNERABLE_DEPENDENCY,LOW,2.6,"markupsafe:1.7.1 has CVE-2022-1161 (CVSS 2.6, LOW). Patched in 3.0.0. [risk model confidence: 99%]"
+DEP-0309,APP-007,DevToolkit,requests,1.13.7,True,VULNERABLE_DEPENDENCY,MEDIUM,7.35,"requests:1.13.7 has CVE-2023-1124 (CVSS 4.9, MEDIUM). No patch available. [risk model confidence: 81%]"
+DEP-0310,APP-007,DevToolkit,scikit-learn,4.6.9,True,VULNERABLE_DEPENDENCY,LOW,5.55,"scikit-learn:4.6.9 has CVE-2021-1007 (CVSS 3.7, LOW). No patch available. [risk model confidence: 62%]"
+DEP-0311,APP-007,DevToolkit,python-dateutil,4.2.0,False,NONE,NONE,0.0,
+DEP-0312,APP-007,DevToolkit,werkzeug,2.15.5,True,VULNERABLE_DEPENDENCY,MEDIUM,8.4,"werkzeug:2.15.5 has CVE-2024-1004 (CVSS 5.6, MEDIUM). No patch available. [risk model confidence: 96%]"
+DEP-0313,APP-007,DevToolkit,spring-core,3.12.10,False,NONE,NONE,0.0,
+DEP-0314,APP-007,DevToolkit,redis-py,1.10.8,False,NONE,NONE,0.0,
+DEP-0315,APP-007,DevToolkit,wheel,4.5.5,False,NONE,NONE,0.0,
+DEP-0316,APP-007,DevToolkit,safety,1.7.2,True,UNMAINTAINED,LOW,2.0,"safety last updated 2022-10-10, over 2 years old. [risk model confidence: 99%]"
+DEP-0317,APP-007,DevToolkit,paramiko,3.15.7,True,VULNERABLE_DEPENDENCY,HIGH,8.0,"paramiko:3.15.7 has CVE-2023-1127 (CVSS 8.0, HIGH). Patched in 6.0.0. [risk model confidence: 65%]"
+DEP-0318,APP-007,DevToolkit,helmet,4.2.3,False,NONE,NONE,0.0,
+DEP-0319,APP-007,DevToolkit,pandas,1.2.7,False,NONE,NONE,0.0,
+DEP-0320,APP-007,DevToolkit,pyjwt,5.4.3,True,VULNERABLE_DEPENDENCY,HIGH,10.95,"pyjwt:5.4.3 has CVE-2025-1123 (CVSS 7.3, HIGH). No patch available. [risk model confidence: 99%]"
+DEP-0321,APP-007,DevToolkit,urllib3,4.2.0,True,ELEVATED_RISK,LOW,1.5,"urllib3 flagged by the risk model on combined signal strength (no single dominant factor -- age 0 days, exploitability/patch history considered together) [confidence: 94%]."
+DEP-0322,APP-007,DevToolkit,cryptography,3.4.5,False,NONE,NONE,0.0,
+DEP-0323,APP-007,DevToolkit,psycopg2,3.5.6,False,NONE,NONE,0.0,
+DEP-0324,APP-007,DevToolkit,bandit,5.2.4,True,VULNERABLE_DEPENDENCY,HIGH,12.75,"bandit:5.2.4 has CVE-2024-1198 (CVSS 8.5, HIGH). No patch available. [risk model confidence: 99%]"
+DEP-0325,APP-007,DevToolkit,matplotlib,5.2.0,False,NONE,NONE,0.0,
+DEP-0326,APP-007,DevToolkit,rich,2.5.6,False,NONE,NONE,0.0,
+DEP-0327,APP-007,DevToolkit,cobra,5.8.10,True,UNMAINTAINED,LOW,2.0,"cobra last updated 2023-09-05, over 2 years old. [risk model confidence: 91%]"
+DEP-0328,APP-007,DevToolkit,ansible-core,4.9.9,True,VULNERABLE_DEPENDENCY,MEDIUM,9.45,"ansible-core:4.9.9 has CVE-2025-1141 (CVSS 6.3, MEDIUM). No patch available. [risk model confidence: 68%]"
+DEP-0329,APP-007,DevToolkit,pip,1.0.3,True,VULNERABLE_DEPENDENCY,HIGH,8.6,"pip:1.0.3 has CVE-2024-1184 (CVSS 8.6, HIGH). Patched in 3.0.0. [risk model confidence: 93%]"
+DEP-0330,APP-007,DevToolkit,snakeyaml,2.14.7,False,NONE,NONE,0.0,
+DEP-0331,APP-007,DevToolkit,six,4.15.9,True,ELEVATED_RISK,LOW,1.5,"six flagged by the risk model on combined signal strength (no single dominant factor -- age 144 days, exploitability/patch history considered together) [confidence: 89%]."
+DEP-0332,APP-007,DevToolkit,redis,4.10.8,True,UNMAINTAINED,LOW,2.0,"redis last updated 2023-06-29, over 2 years old. [risk model confidence: 99%]"
+DEP-0333,APP-007,DevToolkit,celery,5.7.9,True,ELEVATED_RISK,LOW,1.5,"celery flagged by the risk model on combined signal strength (no single dominant factor -- age 190 days, exploitability/patch history considered together) [confidence: 69%]."
+DEP-0334,APP-007,DevToolkit,setuptools,4.11.7,False,NONE,NONE,0.0,
+DEP-0335,APP-007,DevToolkit,coverage,1.13.7,False,NONE,NONE,0.0,
+DEP-0336,APP-007,DevToolkit,charset-normalizer,1.5.6,False,NONE,NONE,0.0,
+DEP-0337,APP-007,DevToolkit,pytest,3.12.0,False,NONE,NONE,0.0,
+DEP-0338,APP-007,DevToolkit,numpy,1.11.0,False,NONE,NONE,0.0,
+DEP-0339,APP-007,DevToolkit,botocore,1.8.0,False,NONE,NONE,0.0,
+DEP-0340,APP-007,DevToolkit,scipy,2.11.4,True,TRANSITIVE_VULNERABILITY,LOW,2.03,"scipy:2.11.4 has CVE-2022-1036 (CVSS 1.8, LOW). No patch available. Pulled in transitively via markupsafe:1.7.1, scikit-learn:4.6.9, bandit:5.2.4, matplotlib:5.2.0. [risk model confidence: 81%]"
+DEP-0341,APP-007,DevToolkit,httpx,3.2.1,True,TRANSITIVE_VULNERABILITY,CRITICAL,7.27,"httpx:3.2.1 has CVE-2023-1097 (CVSS 9.7, CRITICAL). Patched in 4.7.0. Pulled in transitively via matplotlib:5.2.0, redis:4.10.8. [risk model confidence: 88%]"
+DEP-0342,APP-007,DevToolkit,bouncycastle-bcprov,3.4.8,False,NONE,NONE,0.0,
+DEP-0343,APP-007,DevToolkit,aiohttp,2.2.8,False,NONE,NONE,0.0,
+DEP-0344,APP-007,DevToolkit,gunicorn,3.0.7,True,LICENSE_UNKNOWN,HIGH,2.25,gunicorn has no declared license — legal status unknown.
+DEP-0345,APP-007,DevToolkit,click,4.12.2,True,TRANSITIVE_VULNERABILITY,MEDIUM,6.75,"click:4.12.2 has CVE-2024-1039 (CVSS 6.0, MEDIUM). No patch available. Pulled in transitively via python-dateutil:4.2.0, helmet:4.2.3, pyjwt:5.4.3, cryptography:3.4.5, rich:2.5.6, six:4.15.9. [risk model confidence: 92%]"
+DEP-0346,APP-007,DevToolkit,pydantic,3.6.6,False,NONE,NONE,0.0,
+DEP-0347,APP-007,DevToolkit,uvicorn,1.4.8,False,NONE,NONE,0.0,
+DEP-0348,APP-007,DevToolkit,pyyaml,4.11.5,True,TRANSITIVE_VULNERABILITY,CRITICAL,6.98,"pyyaml:4.11.5 has CVE-2022-1069 (CVSS 9.3, CRITICAL). Patched in 5.10.0. [risk model confidence: 92%]"
+DEP-0349,APP-007,DevToolkit,black,3.6.2,True,TRANSITIVE_VULNERABILITY,MEDIUM,6.86,"black:3.6.2 has CVE-2024-1052 (CVSS 6.1, MEDIUM). No patch available. Pulled in transitively via paramiko:3.15.7. [risk model confidence: 99%]"
+DEP-0350,APP-007,DevToolkit,jinja2,2.0.0,False,NONE,NONE,0.0,
+DEP-0351,APP-008,ComplianceEngine,aws-sdk-s3,4.14.7,True,UNMAINTAINED,LOW,2.0,"aws-sdk-s3 last updated 2023-12-27, over 2 years old. [risk model confidence: 99%]"
+DEP-0352,APP-008,ComplianceEngine,mockito-core,5.11.1,True,VULNERABLE_DEPENDENCY,HIGH,13.05,"mockito-core:5.11.1 has CVE-2025-1076 (CVSS 8.7, HIGH). No patch available. [risk model confidence: 55%]"
+DEP-0353,APP-008,ComplianceEngine,guava,3.9.7,True,LICENSE_CONFLICT,CRITICAL,8.0,GPL-2.0 license is incompatible with proprietary app ComplianceEngine.
+DEP-0354,APP-008,ComplianceEngine,mysql-connector-java,2.15.0,False,NONE,NONE,0.0,
+DEP-0355,APP-008,ComplianceEngine,tomcat-embed-core,5.4.2,True,UNMAINTAINED,LOW,2.0,"tomcat-embed-core last updated 2024-01-30, over 2 years old. [risk model confidence: 99%]"
+DEP-0356,APP-008,ComplianceEngine,lettuce-core,4.10.8,False,NONE,NONE,0.0,
+DEP-0357,APP-008,ComplianceEngine,jedis,1.6.9,True,VULNERABLE_DEPENDENCY,LOW,1.1,"jedis:1.6.9 has CVE-2025-1195 (CVSS 1.1, LOW). Patched in 6.0.0. [risk model confidence: 57%]"
+DEP-0358,APP-008,ComplianceEngine,postgresql-jdbc,3.6.3,True,ELEVATED_RISK,LOW,1.5,"postgresql-jdbc flagged by the risk model on combined signal strength (no single dominant factor -- age 48 days, exploitability/patch history considered together) [confidence: 83%]."
+DEP-0359,APP-008,ComplianceEngine,spring-security-core,4.0.8,True,ELEVATED_RISK,LOW,1.5,"spring-security-core flagged by the risk model on combined signal strength (no single dominant factor -- age 377 days, exploitability/patch history considered together) [confidence: 84%]."
+DEP-0360,APP-008,ComplianceEngine,mocha,2.9.6,True,UNMAINTAINED,LOW,2.0,"mocha last updated 2020-04-29, over 2 years old. [risk model confidence: 99%]"
+DEP-0361,APP-008,ComplianceEngine,commons-collections4,1.10.2,False,NONE,NONE,0.0,
+DEP-0362,APP-008,ComplianceEngine,commander,5.7.7,True,UNMAINTAINED,LOW,2.0,"commander last updated 2022-08-09, over 2 years old. [risk model confidence: 99%]"
+DEP-0363,APP-008,ComplianceEngine,boto3,1.8.8,True,VULNERABLE_DEPENDENCY,MEDIUM,6.2,"boto3:1.8.8 has CVE-2025-1155 (CVSS 6.2, MEDIUM). Patched in 4.0.0. [risk model confidence: 61%]"
+DEP-0364,APP-008,ComplianceEngine,logback-classic,3.5.3,True,UNMAINTAINED,LOW,2.0,"logback-classic last updated 2022-08-09, over 2 years old. [risk model confidence: 99%]"
+DEP-0365,APP-008,ComplianceEngine,hibernate-core,3.6.9,False,NONE,NONE,0.0,
+DEP-0366,APP-008,ComplianceEngine,bouncycastle-bcprov,2.8.6,False,NONE,NONE,0.0,
+DEP-0367,APP-008,ComplianceEngine,log4j-api,4.8.3,True,VULNERABLE_DEPENDENCY,MEDIUM,9.45,"log4j-api:4.8.3 has CVE-2022-1041 (CVSS 6.3, MEDIUM). No patch available. [risk model confidence: 62%]"
+DEP-0368,APP-008,ComplianceEngine,h2-database,4.15.6,False,NONE,NONE,0.0,
+DEP-0369,APP-008,ComplianceEngine,spring-boot-starter,3.12.2,False,NONE,NONE,0.0,
+DEP-0370,APP-008,ComplianceEngine,netty-handler,3.6.1,True,VULNERABLE_DEPENDENCY,MEDIUM,7.05,"netty-handler:3.6.1 has CVE-2024-1081 (CVSS 4.7, MEDIUM). No patch available. [risk model confidence: 80%]"
+DEP-0371,APP-008,ComplianceEngine,commons-codec,1.4.1,False,NONE,NONE,0.0,
+DEP-0372,APP-008,ComplianceEngine,spring-web,1.8.10,False,NONE,NONE,0.0,
+DEP-0373,APP-008,ComplianceEngine,junit-jupiter,3.13.6,False,NONE,NONE,0.0,
+DEP-0374,APP-008,ComplianceEngine,grpc-core,4.6.5,False,NONE,NONE,0.0,
+DEP-0375,APP-008,ComplianceEngine,commons-io,4.0.9,True,VULNERABLE_DEPENDENCY,HIGH,8.6,"commons-io:4.0.9 has CVE-2025-1072 (CVSS 8.6, HIGH). Patched in 4.3.0. [risk model confidence: 99%]"
+DEP-0376,APP-008,ComplianceEngine,graphql,1.12.5,False,NONE,NONE,0.0,
+DEP-0377,APP-008,ComplianceEngine,jackson-databind,4.2.1,False,NONE,NONE,0.0,
+DEP-0378,APP-008,ComplianceEngine,micrometer-core,3.0.7,False,NONE,NONE,0.0,
+DEP-0379,APP-008,ComplianceEngine,slf4j-api,3.11.6,False,NONE,NONE,0.0,
+DEP-0380,APP-008,ComplianceEngine,commons-lang3,5.13.8,False,NONE,NONE,0.0,
+DEP-0381,APP-008,ComplianceEngine,pgx,5.4.0,False,NONE,NONE,0.0,
+DEP-0382,APP-008,ComplianceEngine,kafka-clients,3.9.6,False,NONE,NONE,0.0,
+DEP-0383,APP-008,ComplianceEngine,hibernate-validator,2.7.7,False,NONE,NONE,0.0,
+DEP-0384,APP-008,ComplianceEngine,jackson-annotations,3.0.1,True,VULNERABLE_DEPENDENCY,HIGH,8.0,"jackson-annotations:3.0.1 has CVE-2023-1017 (CVSS 8.0, HIGH). Patched in 5.5.0. [risk model confidence: 90%]"
+DEP-0385,APP-008,ComplianceEngine,logback-core,1.5.4,True,LICENSE_UNKNOWN,HIGH,3.0,logback-core has no declared license — legal status unknown.
+DEP-0386,APP-008,ComplianceEngine,axios,3.12.5,False,NONE,NONE,0.0,
+DEP-0387,APP-008,ComplianceEngine,setuptools,1.1.2,True,TRANSITIVE_VULNERABILITY,MEDIUM,4.72,"setuptools:1.1.2 has CVE-2024-1169 (CVSS 6.3, MEDIUM). Patched in 3.0.0. Pulled in transitively via commander:5.7.7, h2-database:4.15.6. [risk model confidence: 96%]"
+DEP-0388,APP-008,ComplianceEngine,httpclient,3.9.6,False,NONE,NONE,0.0,
+DEP-0389,APP-008,ComplianceEngine,resilience4j,2.8.4,False,NONE,NONE,0.0,
+DEP-0390,APP-008,ComplianceEngine,jetty-server,2.8.7,False,NONE,NONE,0.0,
+DEP-0391,APP-008,ComplianceEngine,opentelemetry-api,1.2.8,True,TRANSITIVE_VULNERABILITY,HIGH,6.15,"opentelemetry-api:1.2.8 has CVE-2024-1042 (CVSS 8.2, HIGH). Patched in 3.6.0. Pulled in transitively via commons-io:4.0.9, jackson-annotations:3.0.1. [risk model confidence: 62%]"
+DEP-0392,APP-008,ComplianceEngine,numpy,3.11.5,True,TRANSITIVE_VULNERABILITY,HIGH,5.55,"numpy:3.11.5 has CVE-2022-1148 (CVSS 7.4, HIGH). Patched in 6.0.0. Pulled in transitively via boto3:1.8.8. [risk model confidence: 77%]"
+DEP-0393,APP-008,ComplianceEngine,caffeine,1.3.3,True,TRANSITIVE_VULNERABILITY,MEDIUM,4.12,"caffeine:1.3.3 has CVE-2022-1085 (CVSS 5.5, MEDIUM). Patched in 4.7.0. Pulled in transitively via netty-handler:3.6.1. [risk model confidence: 77%]"
+DEP-0394,APP-008,ComplianceEngine,httpcore,2.5.4,False,NONE,NONE,0.0,
+DEP-0395,APP-008,ComplianceEngine,gson,1.7.8,False,NONE,NONE,0.0,
+DEP-0396,APP-008,ComplianceEngine,mapstruct,4.5.4,False,NONE,NONE,0.0,
+DEP-0397,APP-008,ComplianceEngine,log4j-core,3.1.4,True,UNMAINTAINED,LOW,1.5,"log4j-core last updated 2021-07-20, over 2 years old. [risk model confidence: 99%]"
+DEP-0398,APP-008,ComplianceEngine,aws-sdk-sqs,2.1.1,True,TRANSITIVE_VULNERABILITY,MEDIUM,4.8,"aws-sdk-sqs:2.1.1 has CVE-2022-1156 (CVSS 6.4, MEDIUM). Patched in 3.0.0. Pulled in transitively via tomcat-embed-core:5.4.2, pgx:5.4.0. [risk model confidence: 90%]"
+DEP-0399,APP-008,ComplianceEngine,disruptor,2.11.2,True,ELEVATED_RISK,LOW,1.12,"disruptor flagged by the risk model on combined signal strength (no single dominant factor -- age 402 days, exploitability/patch history considered together) [confidence: 61%]."
+DEP-0400,APP-008,ComplianceEngine,netty-all,3.5.6,False,NONE,NONE,0.0,
+DEP-0401,APP-009,NotificationService,react-dom,1.10.9,True,VULNERABLE_DEPENDENCY,HIGH,8.3,"react-dom:1.10.9 has CVE-2025-1179 (CVSS 8.3, HIGH). Patched in 4.0.0. [risk model confidence: 98%]"
+DEP-0402,APP-009,NotificationService,yaml-go,5.15.0,True,ELEVATED_RISK,LOW,1.5,"yaml-go flagged by the risk model on combined signal strength (no single dominant factor -- age 371 days, exploitability/patch history considered together) [confidence: 87%]."
+DEP-0403,APP-009,NotificationService,jest,3.13.6,True,ELEVATED_RISK,LOW,1.5,"jest flagged by the risk model on combined signal strength (no single dominant factor -- age 271 days, exploitability/patch history considered together) [confidence: 57%]."
+DEP-0404,APP-009,NotificationService,cryptography,3.6.0,False,NONE,NONE,0.0,
+DEP-0405,APP-009,NotificationService,redis,5.1.1,False,NONE,NONE,0.0,
+DEP-0406,APP-009,NotificationService,next,2.13.7,False,NONE,NONE,0.0,
+DEP-0407,APP-009,NotificationService,ansible-core,2.8.10,True,VULNERABLE_DEPENDENCY,MEDIUM,9.45,"ansible-core:2.8.10 has CVE-2025-1141 (CVSS 6.3, MEDIUM). No patch available. [risk model confidence: 89%]"
+DEP-0408,APP-009,NotificationService,sharp,1.14.0,False,NONE,NONE,0.0,
+DEP-0409,APP-009,NotificationService,axios,4.14.1,True,VULNERABLE_DEPENDENCY,MEDIUM,6.3,"axios:4.14.1 has CVE-2022-1196 (CVSS 4.2, MEDIUM). No patch available. [risk model confidence: 99%]"
+DEP-0410,APP-009,NotificationService,winston,2.2.10,True,VULNERABLE_DEPENDENCY,LOW,3.6,"winston:2.2.10 has CVE-2023-1150 (CVSS 3.6, LOW). Patched in 3.0.0. [risk model confidence: 87%]"
+DEP-0411,APP-009,NotificationService,babel-core,5.0.0,True,VULNERABLE_DEPENDENCY,CRITICAL,9.8,"babel-core:5.0.0 has CVE-2025-1106 (CVSS 9.8, CRITICAL). Patched in 6.0.0. [risk model confidence: 86%]"
+DEP-0412,APP-009,NotificationService,chalk,3.6.10,True,VULNERABLE_DEPENDENCY,LOW,1.2,"chalk:3.6.10 has CVE-2022-1170 (CVSS 1.2, LOW). Patched in 4.0.0. [risk model confidence: 93%]"
+DEP-0413,APP-009,NotificationService,twisted,5.3.5,False,NONE,NONE,0.0,
+DEP-0414,APP-009,NotificationService,nanoid,2.3.5,True,LICENSE_UNKNOWN,HIGH,3.0,nanoid has no declared license — legal status unknown.
+DEP-0415,APP-009,NotificationService,inquirer,5.11.0,True,ELEVATED_RISK,LOW,1.5,"inquirer flagged by the risk model on combined signal strength (no single dominant factor -- age 565 days, exploitability/patch history considered together) [confidence: 84%]."
+DEP-0416,APP-009,NotificationService,mocha,3.5.10,False,NONE,NONE,0.0,
+DEP-0417,APP-009,NotificationService,vue,5.14.6,False,NONE,NONE,0.0,
+DEP-0418,APP-009,NotificationService,puppeteer,1.9.3,True,UNMAINTAINED,LOW,2.0,"puppeteer last updated 2022-10-18, over 2 years old. [risk model confidence: 99%]"
+DEP-0419,APP-009,NotificationService,postgresql-jdbc,2.12.3,True,ELEVATED_RISK,LOW,1.5,"postgresql-jdbc flagged by the risk model on combined signal strength (no single dominant factor -- age 333 days, exploitability/patch history considered together) [confidence: 69%]."
+DEP-0420,APP-009,NotificationService,socket.io,5.13.10,True,VULNERABLE_DEPENDENCY,MEDIUM,9.3,"socket.io:5.13.10 has CVE-2021-1038 (CVSS 6.2, MEDIUM). No patch available. [risk model confidence: 75%]"
+DEP-0421,APP-009,NotificationService,sequelize,2.12.8,True,VULNERABLE_DEPENDENCY,CRITICAL,9.4,"sequelize:2.12.8 has CVE-2023-1167 (CVSS 9.4, CRITICAL). Patched in 6.0.0. [risk model confidence: 97%]"
+DEP-0422,APP-009,NotificationService,dayjs,2.4.1,False,NONE,NONE,0.0,
+DEP-0423,APP-009,NotificationService,chai,2.7.6,False,NONE,NONE,0.0,
+DEP-0424,APP-009,NotificationService,graphql,1.11.6,True,VULNERABLE_DEPENDENCY,LOW,0.7,"graphql:1.11.6 has CVE-2025-1158 (CVSS 0.7, LOW). Patched in 5.0.0. [risk model confidence: 92%]"
+DEP-0425,APP-009,NotificationService,commander,3.12.7,True,VULNERABLE_DEPENDENCY,CRITICAL,9.5,"commander:3.12.7 has CVE-2024-1126 (CVSS 9.5, CRITICAL). Patched in 4.0.0. [risk model confidence: 99%]"
+DEP-0426,APP-009,NotificationService,morgan,4.11.6,False,NONE,NONE,0.0,
+DEP-0427,APP-009,NotificationService,django,3.15.10,False,NONE,NONE,0.0,
+DEP-0428,APP-009,NotificationService,multer,2.8.9,True,ELEVATED_RISK,LOW,1.5,"multer flagged by the risk model on combined signal strength (no single dominant factor -- age -9 days, exploitability/patch history considered together) [confidence: 87%]."
+DEP-0429,APP-009,NotificationService,uuid,5.6.6,False,NONE,NONE,0.0,
+DEP-0430,APP-009,NotificationService,lodash,2.12.4,True,LICENSE_CONFLICT,CRITICAL,8.0,GPL-2.0 license is incompatible with proprietary app NotificationService.
+DEP-0431,APP-009,NotificationService,webpack,4.13.10,False,NONE,NONE,0.0,
+DEP-0432,APP-009,NotificationService,helmet,2.6.0,False,NONE,NONE,0.0,
+DEP-0433,APP-009,NotificationService,knex,1.7.7,False,NONE,NONE,0.0,
+DEP-0434,APP-009,NotificationService,express,5.0.6,False,NONE,NONE,0.0,
+DEP-0435,APP-009,NotificationService,passport,2.11.10,False,NONE,NONE,0.0,
+DEP-0436,APP-009,NotificationService,node-fetch,4.11.2,True,TRANSITIVE_VULNERABILITY,HIGH,6.6,"node-fetch:4.11.2 has CVE-2023-1119 (CVSS 8.8, HIGH). Patched in 6.0.0. Pulled in transitively via sharp:1.14.0, multer:2.8.9. [risk model confidence: 67%]"
+DEP-0437,APP-009,NotificationService,moment,4.10.3,True,TRANSITIVE_LICENSE_CONFLICT,CRITICAL,6.0,"AGPL-3.0 license is incompatible with proprietary app NotificationService. Pulled in transitively via yaml-go:5.15.0, multer:2.8.9, helmet:2.6.0."
+DEP-0438,APP-009,NotificationService,cors,1.10.5,False,NONE,NONE,0.0,
+DEP-0439,APP-009,NotificationService,react,2.9.7,False,NONE,NONE,0.0,
+DEP-0440,APP-009,NotificationService,mapstruct,1.11.6,False,NONE,NONE,0.0,
+DEP-0441,APP-009,NotificationService,formidable,1.2.7,False,NONE,NONE,0.0,
+DEP-0442,APP-009,NotificationService,pm2,2.7.1,False,NONE,NONE,0.0,
+DEP-0443,APP-009,NotificationService,prettier,1.1.6,True,LICENSE_UNKNOWN,HIGH,2.25,prettier has no declared license — legal status unknown.
+DEP-0444,APP-009,NotificationService,dotenv,3.3.4,True,TRANSITIVE_VULNERABILITY,LOW,4.16,"dotenv:3.3.4 has CVE-2023-1152 (CVSS 3.7, LOW). No patch available. Pulled in transitively via ansible-core:2.8.10, winston:2.2.10, webpack:4.13.10. [risk model confidence: 99%]"
+DEP-0445,APP-009,NotificationService,nodemon,4.1.5,False,NONE,NONE,0.0,
+DEP-0446,APP-009,NotificationService,eslint,4.11.6,True,ELEVATED_RISK,LOW,1.12,"eslint flagged by the risk model on combined signal strength (no single dominant factor -- age 431 days, exploitability/patch history considered together) [confidence: 58%]."
+DEP-0447,APP-009,NotificationService,jsonwebtoken,3.1.1,False,NONE,NONE,0.0,
+DEP-0448,APP-009,NotificationService,angular-core,3.2.5,False,NONE,NONE,0.0,
+DEP-0449,APP-009,NotificationService,bcrypt,2.6.6,True,TRANSITIVE_VULNERABILITY,CRITICAL,10.58,"bcrypt:2.6.6 has CVE-2023-1074 (CVSS 9.4, CRITICAL). No patch available. Pulled in transitively via jest:3.13.6, redis:5.1.1, axios:4.14.1, inquirer:5.11.0, helmet:2.6.0. [risk model confidence: 82%]"
+DEP-0450,APP-009,NotificationService,nats,2.1.6,True,TRANSITIVE_LICENSE_CONFLICT,CRITICAL,6.0,GPL-3.0 license is incompatible with proprietary app NotificationService. Pulled in transitively via django:3.15.10.
+DEP-0451,APP-010,VendorGateway,pgx,3.4.3,False,NONE,NONE,0.0,
+DEP-0452,APP-010,VendorGateway,protobuf-go,2.12.6,False,NONE,NONE,0.0,
+DEP-0453,APP-010,VendorGateway,rich,1.7.6,False,NONE,NONE,0.0,
+DEP-0454,APP-010,VendorGateway,logrus,3.14.5,True,LICENSE_CONFLICT,CRITICAL,8.0,GPL-2.0 license is incompatible with proprietary app VendorGateway.
+DEP-0455,APP-010,VendorGateway,fiber,5.15.4,False,NONE,NONE,0.0,
+DEP-0456,APP-010,VendorGateway,golangci-lint,4.0.6,True,UNMAINTAINED,LOW,2.0,"golangci-lint last updated 2023-04-12, over 2 years old. [risk model confidence: 99%]"
+DEP-0457,APP-010,VendorGateway,chi,1.5.9,True,LICENSE_UNKNOWN,HIGH,3.0,chi has no declared license — legal status unknown.
+DEP-0458,APP-010,VendorGateway,mockito-core,2.6.10,True,VULNERABLE_DEPENDENCY,HIGH,13.05,"mockito-core:2.6.10 has CVE-2025-1076 (CVSS 8.7, HIGH). No patch available. [risk model confidence: 100%]"
+DEP-0459,APP-010,VendorGateway,setuptools,1.9.10,False,NONE,NONE,0.0,
+DEP-0460,APP-010,VendorGateway,graphql,2.1.3,True,VULNERABLE_DEPENDENCY,LOW,0.7,"graphql:2.1.3 has CVE-2025-1158 (CVSS 0.7, LOW). Patched in 5.0.0. [risk model confidence: 96%]"
+DEP-0461,APP-010,VendorGateway,nats,3.12.10,False,NONE,NONE,0.0,
+DEP-0462,APP-010,VendorGateway,jackson-annotations,3.5.6,True,VULNERABLE_DEPENDENCY,HIGH,8.0,"jackson-annotations:3.5.6 has CVE-2023-1017 (CVSS 8.0, HIGH). Patched in 5.5.0. [risk model confidence: 100%]"
+DEP-0463,APP-010,VendorGateway,sqlx,5.13.1,True,VULNERABLE_DEPENDENCY,MEDIUM,9.3,"sqlx:5.13.1 has CVE-2022-1030 (CVSS 6.2, MEDIUM). No patch available. [risk model confidence: 67%]"
+DEP-0464,APP-010,VendorGateway,resty,4.3.1,False,NONE,NONE,0.0,
+DEP-0465,APP-010,VendorGateway,aws-sdk-go,1.5.5,True,VULNERABLE_DEPENDENCY,CRITICAL,13.8,"aws-sdk-go:1.5.5 has CVE-2023-1103 (CVSS 9.2, CRITICAL). No patch available. [risk model confidence: 72%]"
+DEP-0466,APP-010,VendorGateway,gomock,5.4.10,True,VULNERABLE_DEPENDENCY,HIGH,10.95,"gomock:5.4.10 has CVE-2026-1001 (CVSS 7.3, HIGH). No patch available. [risk model confidence: 91%]"
+DEP-0467,APP-010,VendorGateway,gin,3.2.4,True,VULNERABLE_DEPENDENCY,LOW,3.9,"gin:3.2.4 has CVE-2023-1159 (CVSS 2.6, LOW). No patch available. [risk model confidence: 99%]"
+DEP-0468,APP-010,VendorGateway,caffeine,4.0.9,False,NONE,NONE,0.0,
+DEP-0469,APP-010,VendorGateway,werkzeug,5.1.9,True,VULNERABLE_DEPENDENCY,MEDIUM,8.4,"werkzeug:5.1.9 has CVE-2024-1004 (CVSS 5.6, MEDIUM). No patch available. [risk model confidence: 93%]"
+DEP-0470,APP-010,VendorGateway,go-redis,5.11.0,True,VULNERABLE_DEPENDENCY,HIGH,12.6,"go-redis:5.11.0 has CVE-2024-1128 (CVSS 8.4, HIGH). No patch available. [risk model confidence: 69%]"
+DEP-0471,APP-010,VendorGateway,grpc-go,2.9.10,True,VULNERABLE_DEPENDENCY,MEDIUM,6.3,"grpc-go:2.9.10 has CVE-2026-1056 (CVSS 6.3, MEDIUM). Patched in 3.9.0. [risk model confidence: 69%]"
+DEP-0472,APP-010,VendorGateway,cobra,3.5.6,False,NONE,NONE,0.0,
+DEP-0473,APP-010,VendorGateway,echo,3.7.7,False,NONE,NONE,0.0,
+DEP-0474,APP-010,VendorGateway,colly,4.14.2,False,NONE,NONE,0.0,
+DEP-0475,APP-010,VendorGateway,zap,2.12.6,False,NONE,NONE,0.0,
+DEP-0476,APP-010,VendorGateway,yaml-go,1.4.2,True,LICENSE_UNKNOWN,HIGH,3.0,yaml-go has no declared license — legal status unknown.
+DEP-0477,APP-010,VendorGateway,crypto-go,3.9.7,False,NONE,NONE,0.0,
+DEP-0478,APP-010,VendorGateway,fasthttp,1.8.3,True,VULNERABLE_DEPENDENCY,MEDIUM,10.35,"fasthttp:1.8.3 has CVE-2021-1031 (CVSS 6.9, MEDIUM). No patch available. [risk model confidence: 60%]"
+DEP-0479,APP-010,VendorGateway,viper,3.6.2,False,NONE,NONE,0.0,
+DEP-0480,APP-010,VendorGateway,bcrypt-go,4.15.0,False,NONE,NONE,0.0,
+DEP-0481,APP-010,VendorGateway,json-iterator,2.9.7,False,NONE,NONE,0.0,
+DEP-0482,APP-010,VendorGateway,gorm,2.10.5,True,ELEVATED_RISK,LOW,1.5,"gorm flagged by the risk model on combined signal strength (no single dominant factor -- age 426 days, exploitability/patch history considered together) [confidence: 83%]."
+DEP-0483,APP-010,VendorGateway,go-jwt,1.6.3,False,NONE,NONE,0.0,
+DEP-0484,APP-010,VendorGateway,mux,5.11.5,True,VULNERABLE_DEPENDENCY,MEDIUM,6.5,"mux:5.11.5 has CVE-2022-1199 (CVSS 6.5, MEDIUM). Patched in 6.0.0. [risk model confidence: 63%]"
+DEP-0485,APP-010,VendorGateway,uuid-go,4.2.2,True,ELEVATED_RISK,LOW,1.5,"uuid-go flagged by the risk model on combined signal strength (no single dominant factor -- age 391 days, exploitability/patch history considered together) [confidence: 62%]."
+DEP-0486,APP-010,VendorGateway,chalk,1.12.8,True,TRANSITIVE_VULNERABILITY,LOW,0.9,"chalk:1.12.8 has CVE-2022-1170 (CVSS 1.2, LOW). Patched in 4.0.0. Pulled in transitively via gin:3.2.4, mux:5.11.5. [risk model confidence: 84%]"
+DEP-0487,APP-010,VendorGateway,vue,1.2.3,False,NONE,NONE,0.0,
+DEP-0488,APP-010,VendorGateway,hibernate-validator,2.4.0,True,TRANSITIVE_VULNERABILITY,CRITICAL,7.27,"hibernate-validator:2.4.0 has CVE-2024-1060 (CVSS 9.7, CRITICAL). Patched in 2.8.0. Pulled in transitively via gin:3.2.4. [risk model confidence: 88%]"
+DEP-0489,APP-010,VendorGateway,tomcat-embed-core,3.5.1,False,NONE,NONE,0.0,
+DEP-0490,APP-010,VendorGateway,pip,3.5.0,True,LICENSE_UNKNOWN,HIGH,2.25,pip has no declared license — legal status unknown.
+DEP-0491,APP-010,VendorGateway,chi,1.11.6,False,NONE,NONE,0.0,
+DEP-0492,APP-010,VendorGateway,commons-codec,2.7.3,False,NONE,NONE,0.0,
+DEP-0493,APP-010,VendorGateway,certifi,2.7.3,True,TRANSITIVE_VULNERABILITY,LOW,1.05,"certifi:2.7.3 has CVE-2022-1168 (CVSS 1.4, LOW). Patched in 3.0.0. Pulled in transitively via zap:2.12.6. [risk model confidence: 75%]"
+DEP-0494,APP-010,VendorGateway,bcrypt,2.2.3,True,TRANSITIVE_VULNERABILITY,CRITICAL,10.58,"bcrypt:2.2.3 has CVE-2023-1074 (CVSS 9.4, CRITICAL). No patch available. Pulled in transitively via protobuf-go:2.12.6, setuptools:1.9.10, mux:5.11.5. [risk model confidence: 83%]"
+DEP-0495,APP-010,VendorGateway,crypto-go,4.10.3,False,NONE,NONE,0.0,
+DEP-0496,APP-010,VendorGateway,protobuf-java,4.1.8,False,NONE,NONE,0.0,
+DEP-0497,APP-010,VendorGateway,mux,4.0.1,True,TRANSITIVE_VULNERABILITY,HIGH,5.7,"mux:4.0.1 has CVE-2025-1047 (CVSS 7.6, HIGH). Patched in 4.2.0. Pulled in transitively via resty:4.3.1, gomock:5.4.10. [risk model confidence: 64%]"
+DEP-0498,APP-010,VendorGateway,bouncycastle-bcprov,3.2.0,True,LICENSE_UNKNOWN,HIGH,2.25,bouncycastle-bcprov has no declared license — legal status unknown.
+DEP-0499,APP-010,VendorGateway,chai,3.11.1,True,TRANSITIVE_VULNERABILITY,MEDIUM,5.85,"chai:3.11.1 has CVE-2023-1089 (CVSS 5.2, MEDIUM). No patch available. Pulled in transitively via golangci-lint:4.0.6, go-redis:5.11.0. [risk model confidence: 92%]"
+DEP-0500,APP-010,VendorGateway,nodemon,2.3.0,True,TRANSITIVE_VULNERABILITY,LOW,4.27,"nodemon:2.3.0 has CVE-2023-1132 (CVSS 3.8, LOW). No patch available. Pulled in transitively via logrus:3.14.5, aws-sdk-go:1.5.5, cobra:3.5.6. [risk model confidence: 99%]"

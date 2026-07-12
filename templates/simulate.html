@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Blast Radius · SBOM Risk Scorer{% endblock %}
+{% block body %}
+<h1>Blast-Radius Simulation</h1>
+<p class="sub">"If a zero-day dropped for this library tomorrow, which applications are exposed?"</p>
+
+<div class="card">
+  <form method="post" style="display:flex; gap:.6rem; align-items:center; flex-wrap:wrap;">
+    <select name="library" required style="flex:1; min-width:240px; padding:.5rem .6rem; border-radius:6px; border:1px solid var(--line);">
+      <option value="">Choose a library…</option>
+      {% for lib in libraries %}<option value="{{ lib }}" {{ 'selected' if result and result.library==lib }}>{{ lib }}</option>{% endfor %}
+    </select>
+    <button class="btn" type="submit">Simulate zero-day</button>
+  </form>
+</div>
+
+{% if result %}
+<div class="card" style="margin-top:1rem;">
+  <h2>⚡ {{ result.library }} would expose {{ result.app_count }} application(s)</h2>
+  <p class="sub">Blast-radius score <b>{{ result.blast_score }}</b> (Σ criticality weights of affected apps).</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Application</th><th>Criticality</th><th>Department</th><th>Deployment</th><th>Versions</th><th>Currently flagged?</th></tr></thead>
+    <tbody>
+      {% for a in result.affected_apps %}
+      <tr>
+        <td><b>{{ a.name }}</b></td>
+        <td><span class="badge sev-{{ a.criticality }}">{{ a.criticality }}</span></td>
+        <td>{{ a.department or '—' }}</td>
+        <td>{{ a.deployment or '—' }}</td>
+        <td class="mono">{{ a.versions|join(', ') }}</td>
+        <td>{% if a.flagged %}<span class="pill-bad">yes</span>{% else %}<span class="pill-ok">no</span>{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

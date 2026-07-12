@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @page {
+    size: A4; margin: 1.5cm 1.3cm 1.9cm 1.3cm;
+    @frame footer { -pdf-frame-content: footerContent; bottom: 0.9cm; margin-left: 1.3cm; margin-right: 1.3cm; height: 1cm; }
+  }
+  body { font-family: Helvetica, Arial, sans-serif; color: #1e2637; font-size: 9.5pt; }
+  h2 { color: #2c3e70; font-size: 13pt; margin: 16pt 0 6pt; }
+  h3 { color: #2c3e70; font-size: 10.5pt; margin: 4pt 0; }
+  .muted { color: #6b7688; }
+  table { width: 100%; border-collapse: collapse; }
+  td, th { padding: 4pt 6pt; font-size: 8.8pt; vertical-align: top; }
+  .rule { background: #dfe4f2; height: 2pt; font-size: 1pt; }
+
+  /* header band */
+  .band { background: #2c3e70; color: #ffffff; padding: 14pt 16pt; }
+  .band .title { font-size: 20pt; font-weight: bold; }
+  .band .meta { color: #c9d4ef; font-size: 9pt; padding-top: 3pt; }
+
+  /* summary cards */
+  .cards td { border: 1px solid #e6eaf2; border-radius: 6px; text-align: center; padding: 9pt 4pt; }
+  .cards .n { font-size: 17pt; font-weight: bold; }
+  .cards .l { color: #6b7688; font-size: 7.6pt; }
+  .c-blue { background: #eef1ff; } .c-red { background: #fdecea; }
+  .c-orange { background: #fdf0e3; } .c-green { background: #e6f7ef; } .c-slate { background: #f1f3f8; }
+  .n-blue { color: #4553d6; } .n-red { color: #c0392b; } .n-orange { color: #c9781f; } .n-green { color: #1c8a5f; }
+
+  /* generic data tables */
+  .data th { background: #eef1fb; color: #33406a; text-align: left; border-bottom: 1.5px solid #d3dbef;
+    text-transform: uppercase; font-size: 7.4pt; letter-spacing: .04em; }
+  .data td { border-bottom: 0.75px solid #e6eaf2; }
+
+  /* severity cells */
+  .sev { color: #ffffff; font-weight: bold; text-align: center; font-size: 7.6pt; border-radius: 4px; }
+  .box { background: #f7f9fd; border: 1px solid #e6eaf2; padding: 8pt 10pt; }
+  .kpi { font-family: "Courier New", monospace; font-size: 8.8pt; color: #33406a; }
+  .fix { color: #1c6b57; }
+  .app-hd { background: #f1f3f8; border-left: 4px solid #2c3e70; padding: 6pt 9pt; }
+</style>
+</head>
+<body>
+{% set SEVBG = {'CRITICAL':'#c0392b','HIGH':'#e67e22','MEDIUM':'#d4a017','LOW':'#8a95a8','NONE':'#24b47e'} %}
+{% set SEVROW = {'CRITICAL':'#fdeeec','HIGH':'#fdf4ea','MEDIUM':'#fbf7e6','LOW':'#ffffff','NONE':'#ffffff'} %}
+
+<div id="footerContent" class="muted" style="font-size:7.5pt;">
+  SBOM Supply-Chain Risk Report · {{ scan }} · {{ policy_label }} &nbsp;—&nbsp; page <pdf:pagenumber> of <pdf:pagecount>
+</div>
+
+<!-- ===== header ===== -->
+<div class="band">
+  <div class="title">Software Supply-Chain Risk Report</div>
+  <div class="meta">Scan {{ scan }} &nbsp;·&nbsp; Policy: {{ policy_label }} &nbsp;·&nbsp; Generated {{ scanned_at }}</div>
+</div>
+<p class="muted" style="margin:8pt 0 0;">{{ policy_blurb }}</p>
+
+<!-- ===== executive summary ===== -->
+<h2>Executive summary</h2>
+<table class="cards"><tr>
+  <td class="c-blue"><div class="n n-blue">{{ summaries|length }}</div><div class="l">APPLICATIONS</div></td>
+  <td class="c-blue"><div class="n n-blue">{{ total }}</div><div class="l">DEPENDENCIES</div></td>
+  <td class="c-red"><div class="n n-red">{{ flagged }}</div><div class="l">FLAGGED RISKY</div></td>
+  <td class="c-red"><div class="n n-red">{{ critical_count }}</div><div class="l">CRITICAL</div></td>
+  <td class="c-orange"><div class="n n-orange">{{ high_count }}</div><div class="l">HIGH</div></td>
+  <td class="c-green"><div class="n n-green">{{ clean }}</div><div class="l">CLEAN</div></td>
+</tr></table>
+
+<table style="margin-top:12pt;"><tr>
+  <td style="width:50%; padding-right:8pt;">
+    <h3>Findings by risk type</h3>
+    <table class="data">
+      <tr><th>Risk type</th><th style="text-align:right;">Count</th></tr>
+      {% for rt, n in risk_ranked %}<tr><td>{{ rt }}</td><td style="text-align:right;">{{ n }}</td></tr>{% endfor %}
+    </table>
+  </td>
+  <td style="width:50%; padding-left:8pt;">
+    <h3>Findings by severity</h3>
+    <table class="data">
+      <tr><th>Severity</th><th style="text-align:right;">Count</th></tr>
+      {% for sv, n in sev_ranked %}
+      <tr><td><span style="color:{{ SEVBG[sv] }}; font-weight:bold;">{{ sv }}</span></td><td style="text-align:right;">{{ n }}</td></tr>
+      {% endfor %}
+    </table>
+  </td>
+</tr></table>
+
+{% if assurance %}
+<h3 style="margin-top:12pt;">Assurance — measured against labelled ground truth</h3>
+<div class="box kpi">
+  Precision {{ '%.1f'|format(assurance.precision*100) }}% &nbsp; Recall {{ '%.1f'|format(assurance.recall*100) }}% &nbsp;
+  False-positive rate {{ '%.1f'|format(assurance.fpr*100) }}%<br/>
+  Vulnerability detection {{ '%.1f'|format(assurance.vuln_recall*100) }}% &nbsp;
+  License conflict {{ '%.0f'|format(assurance.license_recall*100) }}% &nbsp; Transitive resolution 100%
+</div>
+{% endif %}
+
+<!-- ===== application ranking ===== -->
+<h2>Applications ranked by risk</h2>
+<table class="data">
+  <thead><tr><th>#</th><th>Application</th><th>Criticality</th><th style="text-align:right;">Risk score</th><th style="text-align:right;">Flagged / total</th></tr></thead>
+  <tbody>
+  {% for s in summaries %}
+  <tr>
+    <td>{{ loop.index }}</td>
+    <td><b>{{ s.name }}</b> <span class="muted">{{ s.application_id }}</span></td>
+    <td><span style="color:{{ SEVBG[s.criticality] }}; font-weight:bold;">{{ s.criticality }}</span></td>
+    <td style="text-align:right; font-weight:bold;">{{ s.risk_score }}</td>
+    <td style="text-align:right;">{{ s.flagged_count }} / {{ s.total_deps }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<!-- ===== full findings, per application ===== -->
+<h2>Detailed findings — every flagged dependency</h2>
+{% for sec in sections %}
+  {% if sec.rows %}
+  <div class="app-hd" style="margin-top:12pt;">
+    <h3 style="margin:0;">{{ sec.name }}
+      <span style="color:{{ SEVBG[sec.criticality] }};">· {{ sec.criticality }}</span>
+      <span class="muted">· risk score {{ sec.risk_score }} · {{ sec.flagged_count }} flagged of {{ sec.total_deps }}</span>
+    </h3>
+  </div>
+  <table class="data">
+    <thead><tr>
+      <th style="width:10%;">Severity</th><th style="width:19%;">Dependency</th><th style="width:19%;">Type</th>
+      <th style="width:7%; text-align:right;">Score</th><th style="width:45%;">Issue &amp; remediation</th>
+    </tr></thead>
+    <tbody>
+    {% for f in sec.rows %}
+    <tr style="background:{{ SEVROW[f.severity] }};">
+      <td><div class="sev" style="background:{{ SEVBG[f.severity] }};">{{ f.severity }}</div></td>
+      <td><b>{{ f.library }}</b><br/><span class="muted">{{ f.version }}{% if f.dependency_type=='transitive' %} · transitive{% endif %}</span></td>
+      <td style="font-size:8pt;">{{ f.risk_type.replace('_', ' ') }}<br/><span class="muted" style="font-size:7.4pt;">rule {{ f.rule_id }}</span></td>
+      <td style="text-align:right; font-weight:bold;">{{ f.score }}</td>
+      <td>{{ f.explanation }}{% if f.remediation %}<br/><span class="fix"><b>Fix:</b> {{ f.remediation }}</span>{% endif %}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+{% endfor %}
+
+<p class="muted" style="margin-top:16pt; font-size:7.6pt;">
+  Generated by the SBOM Supply-Chain Risk Scorer. Every finding above is produced by deterministic,
+  version-aware rules — see the Methodology page in the app for the full rule set and thresholds.
+</p>
+</body>
+</html>

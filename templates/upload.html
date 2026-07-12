@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Upload SBOM · SBOM Risk Scorer{% endblock %}
+{% block body %}
+<h1>Upload an SBOM</h1>
+<p class="sub">Analyze your own software bill of materials. The upload is stored under its own scan and never touches the baseline data.</p>
+
+<div class="card">
+  <form method="post" enctype="multipart/form-data" style="display:flex; gap:.6rem; align-items:center; flex-wrap:wrap;">
+    <input type="file" name="sbom" accept=".csv,.json" required>
+    <button class="btn" type="submit">Ingest &amp; analyze</button>
+  </form>
+</div>
+
+<div class="card" style="margin-top:1rem;">
+  <h2>Accepted formats</h2>
+  <p><b>CycloneDX JSON</b> — the industry-standard SBOM format emitted by <span class="mono">syft</span>, <span class="mono">cdxgen</span>, Trivy, etc. Components and their licenses are read automatically.</p>
+  <p><b>Native CSV</b> — the schema used by this challenge. Minimum columns:
+    <span class="mono">dep_id, application_id, library, version</span>; optional:
+    <span class="mono">application_name, license, dependency_type, last_updated, transitive_deps</span>.</p>
+  <div class="note">Applications referenced by an uploaded SBOM but not otherwise described are given a
+    placeholder profile (proprietary licence model, MEDIUM criticality) so the analysis can run — you can see
+    the result immediately, then refine the application metadata later.</div>
+</div>
+
+<div class="card" style="margin-top:1rem;">
+  <h2>Existing scans</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Scan</th><th>Source</th><th>Apps</th><th>Deps</th><th>Flagged</th><th>Notes</th></tr></thead>
+    <tbody>
+      {% for s in all_scans %}
+      <tr>
+        <td><a href="{{ url_for('dashboard') }}?scan={{ s.scan_id }}&policy={{ nav_policy }}"><b>{{ s.scan_id }}</b></a></td>
+        <td class="sub">{{ s.source }}</td>
+        <td>{{ s.n_apps }}</td><td>{{ s.n_deps }}</td>
+        <td>{{ s.n_flagged if s.n_flagged is not none else '—' }}</td>
+        <td class="sub">{{ s.notes }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+{% endblock %}
