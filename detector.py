@@ -1,3 +1,9 @@
+"""LEGACY ML variant — NOT used by the running app.
+
+The shipped engine is the deterministic rule engine in the `sbom/` package. This
+module (gradient-boosted classifier) is retained only for comparison/evaluation via
+train_model.py and evaluate.py. See README → "Legacy ML variant".
+"""
 import json
 import os
 import pandas as pd
