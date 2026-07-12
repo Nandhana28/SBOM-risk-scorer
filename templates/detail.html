@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{{ app.name }} — Risk Detail</title>
+  <style>
+    body { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; background: #f3f5f4; color: #17211f; margin: 0; padding: 2rem; }
+    a.back { color: #1f7a72; text-decoration: none; font-size: .85rem; }
+    h1 { margin: .6rem 0 .2rem; }
+    .meta { color: #5b6b68; margin-bottom: 1.5rem; font-size: .9rem; }
+    .meta span { margin-right: 1.2rem; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #d7ddda; border-radius: 8px; overflow: hidden; margin-bottom: 1.5rem; }
+    th, td { text-align: left; padding: .6rem .9rem; border-bottom: 1px solid #e6e9e7; font-size: .87rem; }
+    th { background: #eef1ef; text-transform: uppercase; font-size: .7rem; letter-spacing: .05em; color: #5b6b68; }
+    tr:last-child td { border-bottom: none; }
+    .badge { display: inline-block; padding: .1rem .5rem; border-radius: 999px; font-size: .7rem; font-weight: 700; }
+    .badge.CRITICAL { background: #fdeceb; color: #a8291e; }
+    .badge.HIGH { background: #fdf1e3; color: #b5701c; }
+    .badge.MEDIUM { background: #fdf8e3; color: #7a6a1f; }
+    .badge.LOW { background: #eef1ef; color: #5b6b68; }
+    .badge.NONE { background: #eef1ef; color: #5b6b68; }
+    .type-tag { font-family: ui-monospace, Consolas, monospace; font-size: .74rem; color: #1f7a72; }
+    .clean-note { color: #5b6b68; font-size: .85rem; }
+  </style>
+</head>
+<body>
+  <a class="back" href="/">&larr; Back to dashboard</a> &nbsp;|&nbsp;
+  <a class="back" href="/app/{{ app.app_id }}/export.json">Export CycloneDX SBOM &rarr;</a>
+  <h1>{{ app.name }}</h1>
+  <div class="meta">
+    <span><b>Owner:</b> {{ app.business_owner }}</span>
+    <span><b>Department:</b> {{ app.department }}</span>
+    <span><b>Language:</b> {{ app.language }}</span>
+    <span><b>Deployment:</b> {{ app.deployment }}</span>
+    <span><b>License model:</b> {{ app.license_model }}</span>
+    <span><b>Risk score:</b> {{ app_summary.risk_score }}</span>
+  </div>
+
+  <h3>Flagged dependencies ({{ findings|length }})</h3>
+  <table>
+    <tr><th>Library</th><th>Version</th><th>Type</th><th>Severity</th><th>Score</th><th>Explanation</th><th>Suggested Fix</th></tr>
+    {% for f in findings %}
+    <tr>
+      <td>{{ f.library }}</td>
+      <td>{{ f.version }}</td>
+      <td class="type-tag">{{ f.risk_type }}</td>
+      <td><span class="badge {{ f.severity }}">{{ f.severity }}</span></td>
+      <td>{{ f.score }}</td>
+      <td>{{ f.explanation }}</td>
+      <td style="color:#1f7a72;">{{ f.remediation }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <p class="clean-note">{{ clean_count }} other dependencies in this app show no issues.</p>
+</body>
+</html>

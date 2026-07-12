@@ -34,3 +34,7 @@ package-lock.json.bak
 *.swp
 .DS_Store
 Thumbs.db
+
+# local tooling (not part of submission)
+dev_config/
+risk_report*.pdf

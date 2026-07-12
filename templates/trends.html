@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Risk Trends</title>
+  <script src="{{ url_for('static', filename='chart.min.js') }}"></script>
+  <style>
+    body { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; background: #f3f5f4; color: #17211f; margin: 0; padding: 2rem; }
+    a.back { color: #1f7a72; text-decoration: none; font-size: .85rem; }
+    h1 { margin: .6rem 0 .2rem; }
+    .subtitle { color: #5b6b68; margin-bottom: 1.5rem; }
+    .panel { background: #fff; border: 1px solid #d7ddda; border-radius: 8px; padding: 1.2rem; margin-bottom: 1.5rem; }
+    .panel h3 { margin-top: 0; }
+    canvas { max-height: 280px; }
+  </style>
+</head>
+<body>
+  <a class="back" href="/">&larr; Back to dashboard</a>
+  <h1>Risk Trends</h1>
+  <div class="subtitle">Where risk is coming from, over time</div>
+
+  <div class="panel">
+    <h3>New CVE disclosures affecting our dependencies, by month</h3>
+    <canvas id="cveChart"></canvas>
+  </div>
+
+  <div class="panel">
+    <h3>Unmaintained libraries, by last-release year</h3>
+    <canvas id="staleChart"></canvas>
+  </div>
+
+  <script>
+    new Chart(document.getElementById('cveChart'), {
+      type: 'line',
+      data: { labels: {{ cve_months|tojson }}, datasets: [{ label: 'CVEs disclosed', data: {{ cve_counts|tojson }},
+        borderColor: '#a8291e', backgroundColor: 'rgba(168,41,30,0.12)', fill: true, tension: .25 }] },
+      options: { plugins: { legend: { display: false } } }
+    });
+    new Chart(document.getElementById('staleChart'), {
+      type: 'bar',
+      data: { labels: {{ stale_years|tojson }}, datasets: [{ label: 'Unmaintained libraries', data: {{ stale_counts|tojson }},
+        backgroundColor: '#b5701c' }] },
+      options: { plugins: { legend: { display: false } } }
+    });
+  </script>
+</body>
+</html>

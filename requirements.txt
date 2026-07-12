@@ -1,0 +1,4 @@
+flask
+pandas
+xhtml2pdf
+scikit-learn
