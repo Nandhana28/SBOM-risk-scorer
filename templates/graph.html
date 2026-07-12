@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Dependency Graph</title>
+  <script src="{{ url_for('static', filename='vis-network.min.js') }}"></script>
+  <style>
+    body { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; background: #f3f5f4; color: #17211f; margin: 0; padding: 2rem; }
+    a.back { color: #1f7a72; text-decoration: none; font-size: .85rem; }
+    h1 { margin: .6rem 0 .2rem; }
+    .subtitle { color: #5b6b68; margin-bottom: 1rem; }
+    select { padding: .5rem .7rem; border-radius: 5px; border: 1px solid #c7d0cc; font-size: .9rem; margin-bottom: 1rem; }
+    #net { height: 620px; background: #fff; border: 1px solid #d7ddda; border-radius: 8px; }
+    .legend { display: flex; gap: 1rem; margin-top: .8rem; font-size: .8rem; color: #5b6b68; flex-wrap: wrap; }
+    .legend span { display: inline-flex; align-items: center; gap: .35rem; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  </style>
+</head>
+<body>
+  <a class="back" href="/">&larr; Back to dashboard</a>
+  <h1>Dependency Graph</h1>
+  <div class="subtitle">App &rarr; direct dependency &rarr; transitive dependency, colored by risk</div>
+
+  <form method="get">
+    <select name="app" onchange="this.form.submit()">
+      {% for a in apps %}
+      <option value="{{ a.app_id }}" {% if a.app_id == current_app_id %}selected{% endif %}>{{ a.name }}</option>
+      {% endfor %}
+    </select>
+  </form>
+
+  <div id="net"></div>
+  <div class="legend">
+    <span><span class="dot" style="background:#a8291e;"></span> Critical</span>
+    <span><span class="dot" style="background:#b5701c;"></span> High</span>
+    <span><span class="dot" style="background:#c9a227;"></span> Medium</span>
+    <span><span class="dot" style="background:#8aa19b;"></span> Low</span>
+    <span><span class="dot" style="background:#2f7d4f;"></span> Clean</span>
+    <span><span class="dot" style="background:#1f7a72;"></span> Application</span>
+  </div>
+
+  <script>
+    const nodes = new vis.DataSet({{ nodes_json|safe }});
+    const edges = new vis.DataSet({{ edges_json|safe }});
+    const container = document.getElementById('net');
+    const network = new vis.Network(container, { nodes, edges }, {
+      nodes: { shape: 'dot', size: 10, font: { size: 11 } },
+      edges: { arrows: 'to', color: { color: '#c7d0cc' }, smooth: false },
+      physics: {
+        solver: 'forceAtlas2Based',
+        forceAtlas2Based: { gravitationalConstant: -80, springLength: 80, springConstant: .08 },
+        stabilization: { iterations: 120, fit: true },
+        timestep: 0.5
+      },
+      interaction: { hover: true }
+    });
+    network.once('stabilizationIterationsDone', function () { network.setOptions({ physics: false }); });
+  </script>
+</body>
+</html>

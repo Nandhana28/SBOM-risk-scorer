@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SBOM Risk Dashboard</title>
+  {% if not is_pdf %}<script src="{{ url_for('static', filename='chart.min.js') }}"></script>{% endif %}
+  <style>
+    body { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; background: #f3f5f4; color: #17211f; margin: 0; padding: 2rem; }
+    h1 { margin: 0 0 .2rem; }
+    .subtitle { color: #5b6b68; margin-bottom: 1.5rem; }
+    .stats { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .stat { background: #fff; border: 1px solid #d7ddda; border-radius: 8px; padding: 1rem 1.4rem; min-width: 140px; }
+    .stat .num { font-size: 1.8rem; font-weight: 700; }
+    .stat .label { color: #5b6b68; font-size: .82rem; text-transform: uppercase; letter-spacing: .04em; }
+    .alert-banner {
+      background: #fdeceb; border: 1px solid #e0aba5; color: #7a231a; border-radius: 8px;
+      padding: .9rem 1.1rem; margin-bottom: 1.5rem; font-size: .92rem;
+    }
+    .alert-banner b { display: block; margin-bottom: .3rem; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #d7ddda; border-radius: 8px; overflow: hidden; }
+    th, td { text-align: left; padding: .6rem .9rem; border-bottom: 1px solid #e6e9e7; font-size: .9rem; }
+    th { background: #eef1ef; text-transform: uppercase; font-size: .72rem; letter-spacing: .05em; color: #5b6b68; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f7f9f8; }
+    a.row-link { color: inherit; text-decoration: none; display: block; }
+    .crit { color: #a8291e; font-weight: 700; }
+    .high { color: #b5701c; font-weight: 600; }
+    .med { color: #7a6a1f; }
+    .low { color: #5b6b68; }
+    .badge { display: inline-block; padding: .1rem .5rem; border-radius: 999px; font-size: .72rem; font-weight: 700; }
+    .badge.CRITICAL { background: #fdeceb; color: #a8291e; }
+    .badge.HIGH { background: #fdf1e3; color: #b5701c; }
+    .badge.MEDIUM { background: #fdf8e3; color: #7a6a1f; }
+    .badge.LOW { background: #eef1ef; color: #5b6b68; }
+    .actions { margin-top: 1.2rem; }
+    .actions a { color: #1f7a72; font-weight: 600; text-decoration: none; }
+    canvas { max-width: 420px; margin-bottom: 1.5rem; }
+  </style>
+</head>
+<body>
+  <h1>Software Supply Chain Risk Dashboard</h1>
+  <div class="subtitle">
+    10 applications &middot; 500 dependencies scanned
+    {% if not is_pdf %}
+    &middot; last scanned {{ scanned_at }}
+    &middot; <form method="post" action="/rescan" style="display:inline;"><button type="submit" style="background:none;border:none;color:#1f7a72;font-weight:600;cursor:pointer;padding:0;font-size:.85rem;">Re-scan now &#8635;</button></form>
+    {% endif %}
+  </div>
+
+  {% if critical_alerts %}
+  <div class="alert-banner">
+    <b>&#128308; {{ critical_alerts|length }} CRITICAL severity findings require immediate attention</b>
+    {% for c in critical_alerts[:5] %}
+      {{ c.library }}:{{ c.version }} in {{ c.application_name }} &mdash; {{ c.explanation }}<br>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="stats">
+    <div class="stat"><div class="num">{{ total }}</div><div class="label">Total Dependencies</div></div>
+    <div class="stat"><div class="num">{{ flagged }}</div><div class="label">Flagged</div></div>
+    <div class="stat"><div class="num">{{ clean }}</div><div class="label">Clean</div></div>
+    <div class="stat"><div class="num">{{ summary|length }}</div><div class="label">Applications</div></div>
+  </div>
+
+  {% if not is_pdf %}
+  <canvas id="riskChart" height="180"></canvas>
+  <script>
+    new Chart(document.getElementById('riskChart'), {
+      type: 'bar',
+      data: {
+        labels: {{ risk_breakdown.keys()|list|tojson }},
+        datasets: [{ label: 'Dependencies', data: {{ risk_breakdown.values()|list|tojson }},
+          backgroundColor: '#1f7a72' }]
+      },
+      options: { plugins: { legend: { display: false } } }
+    });
+  </script>
+  {% endif %}
+
+  <h3>Applications, ranked by risk</h3>
+  <table>
+    <tr><th>App</th><th>Criticality</th><th>Risk Score</th><th>Flagged</th><th>Total Deps</th></tr>
+    {% for s in summary %}
+    <tr>
+      <td>{% if not is_pdf %}<a class="row-link" href="/app/{{ s.application_id }}">{{ s.name }}</a>{% else %}{{ s.name }}{% endif %}</td>
+      <td><span class="badge {{ s.criticality }}">{{ s.criticality }}</span></td>
+      <td>{{ s.risk_score }}</td>
+      <td>{{ s.flagged_count }}</td>
+      <td>{{ s.total_deps }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  {% if not is_pdf %}
+  <div class="actions">
+    <a href="/report.pdf">Download PDF Report &rarr;</a> &nbsp;|&nbsp;
+    <a href="/inventory">Org-Wide Shared Risk Inventory &rarr;</a> &nbsp;|&nbsp;
+    <a href="/simulate">Attack Simulation &rarr;</a> &nbsp;|&nbsp;
+    <a href="/trends">Risk Trends &rarr;</a> &nbsp;|&nbsp;
+    <a href="/graph">Dependency Graph &rarr;</a>
+  </div>
+  {% endif %}
+</body>
+</html>
