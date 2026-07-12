@@ -1,52 +1,74 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Org-Wide Shared Risk Inventory</title>
-  <style>
-    body { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; background: #f3f5f4; color: #17211f; margin: 0; padding: 2rem; }
-    a.back { color: #1f7a72; text-decoration: none; font-size: .85rem; }
-    h1 { margin: .6rem 0 .2rem; }
-    .subtitle { color: #5b6b68; margin-bottom: 1.5rem; }
-    .stats { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-    .stat { background: #fff; border: 1px solid #d7ddda; border-radius: 8px; padding: 1rem 1.4rem; min-width: 140px; }
-    .stat .num { font-size: 1.8rem; font-weight: 700; }
-    .stat .label { color: #5b6b68; font-size: .82rem; text-transform: uppercase; letter-spacing: .04em; }
-    table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #d7ddda; border-radius: 8px; overflow: hidden; }
-    th, td { text-align: left; padding: .6rem .9rem; border-bottom: 1px solid #e6e9e7; font-size: .87rem; vertical-align: top; }
-    th { background: #eef1ef; text-transform: uppercase; font-size: .7rem; letter-spacing: .05em; color: #5b6b68; }
-    .badge { display: inline-block; padding: .1rem .5rem; border-radius: 999px; font-size: .7rem; font-weight: 700; }
-    .badge.CRITICAL { background: #fdeceb; color: #a8291e; }
-    .badge.HIGH { background: #fdf1e3; color: #b5701c; }
-    .badge.MEDIUM { background: #fdf8e3; color: #7a6a1f; }
-    .badge.LOW { background: #eef1ef; color: #5b6b68; }
-    .count-badge { background: #1f7a72; color: #fff; border-radius: 999px; padding: .1rem .55rem; font-weight: 700; font-size: .78rem; }
-    .apps { color: #5b6b68; font-size: .82rem; }
-  </style>
-</head>
-<body>
-  <a class="back" href="/">&larr; Back to dashboard</a>
-  <h1>Org-Wide Shared Risk Inventory</h1>
-  <div class="subtitle">Fix once, protect multiple applications</div>
+{% extends "base.html" %}
+{% block title %}Inventory · SBOM Risk Scorer{% endblock %}
+{% block body %}
+<h1>Org-Wide Shared-Risk Inventory</h1>
+<p class="sub">Libraries flagged across the portfolio. Fixing a shared one protects several applications at once.</p>
 
-  <div class="stats">
-    <div class="stat"><div class="num">{{ total_unique_risky_libs }}</div><div class="label">Unique Risky Dependencies</div></div>
-    <div class="stat"><div class="num">{{ shared_count }}</div><div class="label">Shared Across 2+ Apps</div></div>
-    <div class="stat"><div class="num">{{ single_count }}</div><div class="label">Single-App Only</div></div>
+<div class="grid cols-3">
+  <div class="card stat"><div class="chip chip-blue">{{ icon('package') }}</div><div class="n">{{ unique_libs }}</div><div class="l">Unique risky libraries</div></div>
+  <div class="card stat crit"><div class="chip chip-red">{{ icon('network') }}</div><div class="n">{{ shared|length }}</div><div class="l">Shared across 2+ apps</div></div>
+  <div class="card stat"><div class="chip chip-slate">{{ icon('box') }}</div><div class="n">{{ single|length }}</div><div class="l">Single-app only</div></div>
+</div>
+
+<div class="card" style="margin-top:1rem;">
+  <h2>Shared across multiple applications</h2>
+  <div class="toolbar" data-filter-group data-items="#sharedTable tbody tr:not(.empty-row)" data-empty="#sharedEmpty">
+    <div class="search"><input type="search" data-role="search" placeholder="Search library, app, version or risk type…"></div>
+    <label>Worst severity</label>
+    <select data-role="filter" data-attr="severity">
+      <option value="">all</option><option>CRITICAL</option><option>HIGH</option><option>MEDIUM</option><option>LOW</option>
+    </select>
+    <button class="reset" data-role="reset">Reset</button>
+    <span class="count" data-role="count"></span>
   </div>
-
-  <table>
-    <tr><th>Library</th><th>Versions in Use</th><th>Type(s)</th><th>Worst Severity</th><th>Apps Affected</th><th>Fix Impact</th></tr>
-    {% for s in shared %}
-    <tr>
-      <td>{{ s.library }}</td>
-      <td>{{ s.versions|join(', ') }}</td>
-      <td>{{ s.risk_types|join(', ') }}</td>
-      <td><span class="badge {{ s.worst_severity }}">{{ s.worst_severity }}</span></td>
-      <td class="apps">{{ s.apps_affected|join(', ') }}</td>
-      <td><span class="count-badge">{{ s.app_count }} apps</span></td>
-    </tr>
-    {% endfor %}
+  <div class="tablewrap">
+  <table id="sharedTable" data-sortable>
+    <thead><tr><th data-sort="text">Library</th><th data-sort="num">Apps</th><th>Versions</th><th>Risk type(s)</th><th data-sort="text">Worst severity</th><th data-sort="num">Σ score</th></tr></thead>
+    <tbody>
+      {% for r in shared %}
+      <tr data-severity="{{ r.worst_severity }}">
+        <td><b>{{ r.library }}</b></td>
+        <td data-val="{{ r.app_count }}"><span class="badge sev-HIGH">{{ r.app_count }}</span> <span class="sub">{{ r.apps|join(', ') }}</span></td>
+        <td class="mono">{{ r.versions|join(', ') }}</td>
+        <td>{% for t in r.risk_types %}<span class="tag">{{ t }}</span>{% endfor %}</td>
+        <td data-val="{{ severity_order[r.worst_severity] }}"><span class="badge sev-{{ r.worst_severity }}">{{ r.worst_severity }}</span></td>
+        <td data-val="{{ r.total_score }}" class="score">{{ r.total_score }}</td>
+      </tr>
+      {% endfor %}
+      <tr class="empty-row" id="sharedEmpty" {% if shared %}style="display:none"{% endif %}><td colspan="6">No shared library matches your filters.</td></tr>
+    </tbody>
   </table>
-</body>
-</html>
+  </div>
+</div>
+
+<div class="card" style="margin-top:1rem;">
+  <h2>Single-application risks</h2>
+  <div class="toolbar" data-filter-group data-items="#singleTable tbody tr:not(.empty-row)" data-empty="#singleEmpty">
+    <div class="search"><input type="search" data-role="search" placeholder="Search library, app, version or risk type…"></div>
+    <label>Worst severity</label>
+    <select data-role="filter" data-attr="severity">
+      <option value="">all</option><option>CRITICAL</option><option>HIGH</option><option>MEDIUM</option><option>LOW</option>
+    </select>
+    <button class="reset" data-role="reset">Reset</button>
+    <span class="count" data-role="count"></span>
+  </div>
+  <div class="tablewrap">
+  <table id="singleTable" data-sortable>
+    <thead><tr><th data-sort="text">Library</th><th data-sort="text">App</th><th>Versions</th><th>Risk type(s)</th><th data-sort="text">Worst severity</th><th data-sort="num">Score</th></tr></thead>
+    <tbody>
+      {% for r in single %}
+      <tr data-severity="{{ r.worst_severity }}">
+        <td><b>{{ r.library }}</b></td>
+        <td class="sub">{{ r.apps[0] }}</td>
+        <td class="mono">{{ r.versions|join(', ') }}</td>
+        <td>{% for t in r.risk_types %}<span class="tag">{{ t }}</span>{% endfor %}</td>
+        <td data-val="{{ severity_order[r.worst_severity] }}"><span class="badge sev-{{ r.worst_severity }}">{{ r.worst_severity }}</span></td>
+        <td data-val="{{ r.total_score }}" class="score">{{ r.total_score }}</td>
+      </tr>
+      {% endfor %}
+      <tr class="empty-row" id="singleEmpty" {% if single %}style="display:none"{% endif %}><td colspan="6">No single-app risk matches your filters.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+{% endblock %}

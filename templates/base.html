@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}SBOM Risk Scorer{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo">{{ icon('shield') }}</div>
+      <div>
+        <div class="brand-name">SBOM Risk Scorer</div>
+        <div class="brand-sub">Supply-Chain Governance</div>
+      </div>
+    </div>
+
+    {% set ep = request.endpoint %}
+    {% set q = '?scan=' ~ nav_scan ~ '&policy=' ~ nav_policy %}
+    <nav class="nav">
+      <div class="nav-group">
+        <div class="nav-label">Overview</div>
+        <a class="nav-item {{ 'active' if ep=='dashboard' }}" href="{{ url_for('dashboard') }}{{ q }}">{{ icon('grid') }} Dashboard</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-label">Analysis</div>
+        <a class="nav-item {{ 'active' if ep in ['inventory','app_detail'] }}" href="{{ url_for('inventory') }}{{ q }}">{{ icon('package') }} Inventory</a>
+        <a class="nav-item {{ 'active' if ep=='graph' }}" href="{{ url_for('graph') }}{{ q }}">{{ icon('network') }} Dependency Graph</a>
+        <a class="nav-item {{ 'active' if ep=='trends' }}" href="{{ url_for('trends') }}{{ q }}">{{ icon('trending-up') }} Trends</a>
+        <a class="nav-item {{ 'active' if ep=='simulate' }}" href="{{ url_for('simulate') }}{{ q }}">{{ icon('zap') }} Blast Radius</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-label">Assurance</div>
+        <a class="nav-item {{ 'active' if ep=='validation' }}" href="{{ url_for('validation') }}?policy={{ nav_policy }}">{{ icon('shield-check') }} Validation</a>
+        <a class="nav-item {{ 'active' if ep=='methodology' }}" href="{{ url_for('methodology') }}">{{ icon('book') }} Methodology</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-label">Data</div>
+        <a class="nav-item {{ 'active' if ep=='upload' }}" href="{{ url_for('upload') }}">{{ icon('upload') }} Upload SBOM</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-label">View</div>
+        <div class="nav-select"><label>Scan</label>
+          <select id="sel-scan">{% for s in all_scans %}<option value="{{ s.scan_id }}" {{ 'selected' if s.scan_id==nav_scan }}>{{ s.scan_id }}</option>{% endfor %}</select>
+        </div>
+        <div class="nav-select"><label>Risk policy</label>
+          <select id="sel-policy">{% for key, p in all_policies.items() %}<option value="{{ key }}" {{ 'selected' if key==nav_policy }}>{{ p.label }}</option>{% endfor %}</select>
+        </div>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <header class="topbar">
+      <div class="crumbs"><b>SBOM Risk Scorer</b> {{ icon('chevron') }} {{ page_title }}</div>
+      <div class="actions">{% block actions %}{% endblock %}</div>
+    </header>
+    <div class="page">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for cat, msg in messages %}<div class="flash {{ cat }}">{{ msg }}</div>{% endfor %}
+      {% endwith %}
+      {% block body %}{% endblock %}
+    </div>
+  </main>
+</div>
+
+<script>
+  function reload(param, value) {
+    const u = new URL(window.location.href);
+    u.searchParams.set(param, value);
+    window.location.href = u.toString();
+  }
+  document.getElementById('sel-scan').addEventListener('change', e => reload('scan', e.target.value));
+  document.getElementById('sel-policy').addEventListener('change', e => reload('policy', e.target.value));
+</script>
+<script src="{{ url_for('static', filename='filters.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

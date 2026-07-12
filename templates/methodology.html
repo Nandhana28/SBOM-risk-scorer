@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Methodology · SBOM Risk Scorer{% endblock %}
+{% block body %}
+<h1>Methodology &amp; audit reference</h1>
+<p class="sub">The complete risk policy on one page. Every threshold below is read live from
+  <span class="mono">sbom/config.py</span> — this documentation cannot drift from the running engine.</p>
+
+<div class="card methodology">
+  <h2>Design principle</h2>
+  <p>Risk decisions are made by <b>deterministic rules</b>, not a trained model. For a governance tool this is
+     deliberate: an auditor can reproduce and challenge every finding from the evidence, the same SBOM always
+     yields the same result, and there is no over-fitting to a particular sample. Thresholds are chosen on
+     security-domain <i>principle</i> (industry CVSS bands, a 2-year staleness convention), so the engine
+     generalises to SBOMs it has never seen.</p>
+
+  <h3>1 · License compatibility</h3>
+  <p>A dependency is flagged when its declared licence is marked <span class="mono">compatible_with_proprietary = false</span>
+     in the licence matrix <b>and</b> the application ships under a proprietary model — or when it declares no licence
+     at all (<span class="mono">UNKNOWN</span>). This rule is exact against the ground truth (100% recall, 0 false positives).</p>
+
+  <h3>2 · Vulnerability matching (version-aware)</h3>
+  <p>A CVE affects a dependency when the installed version is below the advisory's <span class="mono">fixed_version</span>,
+     or when no fix exists yet. This is the same package+version test used by Dependabot, pip-audit and Grype.
+     (The dataset's <span class="mono">affected_versions</span> field is unreliable and is deliberately not used.)</p>
+
+  <h3>3 · Maintenance</h3>
+  <p>A dependency is flagged <span class="mono">UNMAINTAINED</span> when its last release predates the reference date
+     (<span class="mono">{{ cfg.REFERENCE_DATE }}</span>) by more than <b>{{ cfg.MAINTENANCE_YEARS }} years</b>.</p>
+
+  <h3>4 · Risk-appetite policies</h3>
+  <p>Whether a <i>matched</i> CVE is escalated to a flagged risk is a governance choice, expressed as one of three policies:</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Policy</th><th>Escalates a matched CVE when…</th></tr></thead>
+    <tbody>
+      {% for key, p in all_policies.items() %}
+      <tr>
+        <td><b>{{ p.label }}</b><br><span class="sub">{{ p.blurb }}</span></td>
+        <td class="mono">
+          {% set t = p.triggers %}
+          {% if t.any_hit %}any version match{% else %}
+            {% set parts = [] %}
+            {% if t.unpatched %}{% set _ = parts.append('unpatched') %}{% endif %}
+            {% if t.cvss_high %}{% set _ = parts.append('CVSS ≥ ' ~ cfg.CVSS_HIGH) %}{% endif %}
+            {% if t.exploit_high %}{% set _ = parts.append('exploitability = HIGH') %}{% endif %}
+            {{ parts|join('  OR  ') }}
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+  <h3>5 · Scoring (transparent &amp; additive)</h3>
+  <p>Each dependency's score follows Option C's prescribed shape, with every point attributable to a named component:</p>
+  <div class="evidence mono">
+    score = Σ(matched-CVE CVSS, ×{{ cfg.UNPATCHED_MULTIPLIER }} if unpatched) + license_penalty + maintenance_penalty,
+    then × depth-weight (direct {{ cfg.DEPTH_WEIGHT.direct }}, transitive {{ cfg.DEPTH_WEIGHT.transitive }})
+  </div>
+  <p class="sub" style="margin-top:.6rem;">license_penalty by licence risk level:
+    CRITICAL {{ cfg.LICENSE_PENALTY.CRITICAL }} · HIGH {{ cfg.LICENSE_PENALTY.HIGH }} ·
+    MEDIUM {{ cfg.LICENSE_PENALTY.MEDIUM }} · unknown {{ cfg.LICENSE_UNKNOWN_PENALTY }}.
+    maintenance_penalty {{ cfg.MAINTENANCE_PENALTY }}.
+    Per-application score = Σ(dependency scores) × criticality weight
+    (CRITICAL {{ cfg.CRITICALITY_WEIGHT.CRITICAL }} · HIGH {{ cfg.CRITICALITY_WEIGHT.HIGH }} ·
+    MEDIUM {{ cfg.CRITICALITY_WEIGHT.MEDIUM }} · LOW {{ cfg.CRITICALITY_WEIGHT.LOW }}).</p>
+
+  <h3>6 · Architecture</h3>
+  <p>SBOM data lives in SQLite (each upload isolated under its own scan id, with a durable audit log of every run).
+     The engine reads from the database, applies the rules above, persists findings, and the Flask layer renders
+     views. See <a href="{{ url_for('validation') }}">Validation</a> for measured accuracy against the labelled ground truth.</p>
+</div>
+{% endblock %}

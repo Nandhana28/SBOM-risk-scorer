@@ -169,12 +169,21 @@ def train_risk_model():
 
 
 _MODEL_CACHE = None
+MODEL_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "models", "risk_model.pkl")
 
 
 def get_model():
+    """Return the classifier, preferring a pre-trained pickle on disk so we don't
+    retrain from scratch on every process start. Falls back to training in-process
+    if no saved model exists (run `python train_model.py` to create one)."""
     global _MODEL_CACHE
     if _MODEL_CACHE is None:
-        _MODEL_CACHE = train_risk_model()
+        if os.path.exists(MODEL_PATH):
+            import pickle
+            with open(MODEL_PATH, "rb") as f:
+                _MODEL_CACHE = pickle.load(f)["model"]
+        else:
+            _MODEL_CACHE = train_risk_model()
     return _MODEL_CACHE
 
 

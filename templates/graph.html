@@ -1,60 +1,65 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Dependency Graph</title>
-  <script src="{{ url_for('static', filename='vis-network.min.js') }}"></script>
-  <style>
-    body { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; background: #f3f5f4; color: #17211f; margin: 0; padding: 2rem; }
-    a.back { color: #1f7a72; text-decoration: none; font-size: .85rem; }
-    h1 { margin: .6rem 0 .2rem; }
-    .subtitle { color: #5b6b68; margin-bottom: 1rem; }
-    select { padding: .5rem .7rem; border-radius: 5px; border: 1px solid #c7d0cc; font-size: .9rem; margin-bottom: 1rem; }
-    #net { height: 620px; background: #fff; border: 1px solid #d7ddda; border-radius: 8px; }
-    .legend { display: flex; gap: 1rem; margin-top: .8rem; font-size: .8rem; color: #5b6b68; flex-wrap: wrap; }
-    .legend span { display: inline-flex; align-items: center; gap: .35rem; }
-    .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-  </style>
-</head>
-<body>
-  <a class="back" href="/">&larr; Back to dashboard</a>
-  <h1>Dependency Graph</h1>
-  <div class="subtitle">App &rarr; direct dependency &rarr; transitive dependency, colored by risk</div>
+{% extends "base.html" %}
+{% block title %}Dependency Graph · SBOM Risk Scorer{% endblock %}
+{% block head %}<script src="{{ url_for('static', filename='vis-network.min.js') }}"></script>{% endblock %}
+{% block body %}
+<h1>Dependency Graph</h1>
+<p class="sub">Application → direct dependency → transitive dependency, coloured by risk severity.</p>
 
-  <form method="get">
+<div class="toolbar">
+  <form method="get" style="display:contents">
+    <input type="hidden" name="scan" value="{{ nav_scan }}"><input type="hidden" name="policy" value="{{ nav_policy }}">
+    <label>Application</label>
     <select name="app" onchange="this.form.submit()">
-      {% for a in apps %}
-      <option value="{{ a.app_id }}" {% if a.app_id == current_app_id %}selected{% endif %}>{{ a.name }}</option>
-      {% endfor %}
+      {% for a in apps %}<option value="{{ a.app_id }}" {{ 'selected' if a.app_id==current_app_id }}>{{ a.name }}</option>{% endfor %}
     </select>
   </form>
-
-  <div id="net"></div>
-  <div class="legend">
-    <span><span class="dot" style="background:#a8291e;"></span> Critical</span>
-    <span><span class="dot" style="background:#b5701c;"></span> High</span>
-    <span><span class="dot" style="background:#c9a227;"></span> Medium</span>
-    <span><span class="dot" style="background:#8aa19b;"></span> Low</span>
-    <span><span class="dot" style="background:#2f7d4f;"></span> Clean</span>
-    <span><span class="dot" style="background:#1f7a72;"></span> Application</span>
+  <div class="search" style="max-width:220px"><input type="search" id="nodeSearch" placeholder="Find a library in the graph…"></div>
+  <label>Show</label>
+  <div class="chips" id="sevChips">
+    <span class="chip on" data-sev="CRITICAL">Critical</span>
+    <span class="chip on" data-sev="HIGH">High</span>
+    <span class="chip on" data-sev="MEDIUM">Medium</span>
+    <span class="chip on" data-sev="LOW">Low</span>
+    <span class="chip on" data-sev="NONE">Clean</span>
   </div>
+</div>
 
-  <script>
-    const nodes = new vis.DataSet({{ nodes_json|safe }});
-    const edges = new vis.DataSet({{ edges_json|safe }});
-    const container = document.getElementById('net');
-    const network = new vis.Network(container, { nodes, edges }, {
-      nodes: { shape: 'dot', size: 10, font: { size: 11 } },
-      edges: { arrows: 'to', color: { color: '#c7d0cc' }, smooth: false },
-      physics: {
-        solver: 'forceAtlas2Based',
-        forceAtlas2Based: { gravitationalConstant: -80, springLength: 80, springConstant: .08 },
-        stabilization: { iterations: 120, fit: true },
-        timestep: 0.5
-      },
-      interaction: { hover: true }
-    });
-    network.once('stabilizationIterationsDone', function () { network.setOptions({ physics: false }); });
-  </script>
-</body>
-</html>
+<div class="card" style="padding:.4rem;"><div id="net" style="height:600px;"></div></div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const rawNodes = {{ nodes_json|safe }};
+const nodes = new vis.DataSet(rawNodes);
+const edges = new vis.DataSet({{ edges_json|safe }});
+const network = new vis.Network(document.getElementById('net'), { nodes, edges }, {
+  nodes: { shape: 'dot', size: 11, font: { size: 12 } },
+  edges: { arrows: 'to', color: { color: '#c7d0d8' }, smooth: false },
+  physics: { solver: 'forceAtlas2Based',
+    forceAtlas2Based: { gravitationalConstant: -80, springLength: 90, springConstant: .08 },
+    stabilization: { iterations: 150, fit: true } },
+  interaction: { hover: true }
+});
+network.once('stabilizationIterationsDone', function(){ network.setOptions({ physics: false }); });
+
+// severity chip toggles -> hide/show nodes (the app node has no sev and always shows)
+const active = new Set(['CRITICAL','HIGH','MEDIUM','LOW','NONE']);
+function applySev() {
+  nodes.update(rawNodes.map(n => ({ id: n.id, hidden: n.sev ? !active.has(n.sev) : false })));
+}
+document.querySelectorAll('#sevChips .chip').forEach(chip => chip.addEventListener('click', () => {
+  const s = chip.dataset.sev;
+  if (active.has(s)) { active.delete(s); chip.classList.remove('on'); }
+  else { active.add(s); chip.classList.add('on'); }
+  applySev();
+}));
+
+// node search -> focus + select the first matching library
+document.getElementById('nodeSearch').addEventListener('input', e => {
+  const q = e.target.value.toLowerCase().trim();
+  if (!q) { network.unselectAll(); return; }
+  const hit = rawNodes.find(n => (n.label||'').toLowerCase().includes(q) && n.sev);
+  if (hit) { network.selectNodes([hit.id]); network.focus(hit.id, { scale: 1.2, animation: true }); }
+});
+</script>
+{% endblock %}

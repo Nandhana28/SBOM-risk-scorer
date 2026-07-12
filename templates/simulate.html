@@ -1,60 +1,40 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Supply Chain Attack Simulation</title>
-  <style>
-    body { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; background: #f3f5f4; color: #17211f; margin: 0; padding: 2rem; }
-    a.back { color: #1f7a72; text-decoration: none; font-size: .85rem; }
-    h1 { margin: .6rem 0 .2rem; }
-    .subtitle { color: #5b6b68; margin-bottom: 1.5rem; }
-    form { background: #fff; border: 1px solid #d7ddda; border-radius: 8px; padding: 1.2rem; margin-bottom: 1.5rem; display: flex; gap: .8rem; align-items: center; }
-    select { padding: .5rem .7rem; border-radius: 5px; border: 1px solid #c7d0cc; font-size: .9rem; flex: 1; }
-    button { background: #1f7a72; color: #fff; border: none; padding: .55rem 1.1rem; border-radius: 5px; font-weight: 600; cursor: pointer; font-size: .9rem; }
-    .result-banner { background: #fdeceb; border: 1px solid #e0aba5; color: #7a231a; border-radius: 8px; padding: 1rem; margin-bottom: 1.2rem; }
-    .result-banner .headline { font-size: 1.1rem; font-weight: 700; margin-bottom: .3rem; }
-    table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #d7ddda; border-radius: 8px; overflow: hidden; }
-    th, td { text-align: left; padding: .6rem .9rem; border-bottom: 1px solid #e6e9e7; font-size: .87rem; }
-    th { background: #eef1ef; text-transform: uppercase; font-size: .7rem; letter-spacing: .05em; color: #5b6b68; }
-    .badge { display: inline-block; padding: .1rem .5rem; border-radius: 999px; font-size: .7rem; font-weight: 700; }
-    .badge.CRITICAL { background: #fdeceb; color: #a8291e; }
-    .badge.HIGH { background: #fdf1e3; color: #b5701c; }
-    .badge.MEDIUM { background: #fdf8e3; color: #7a6a1f; }
-    .badge.LOW { background: #eef1ef; color: #5b6b68; }
-  </style>
-</head>
-<body>
-  <a class="back" href="/">&larr; Back to dashboard</a>
-  <h1>Supply Chain Attack Simulation</h1>
-  <div class="subtitle">"If a zero-day dropped for this library tomorrow, what's exposed?"</div>
+{% extends "base.html" %}
+{% block title %}Blast Radius · SBOM Risk Scorer{% endblock %}
+{% block body %}
+<h1>Blast-Radius Simulation</h1>
+<p class="sub">"If a zero-day dropped for this library tomorrow, which applications are exposed?"</p>
 
-  <form method="post">
-    <select name="library" required>
-      <option value="">Choose a library...</option>
-      {% for lib in libraries %}
-      <option value="{{ lib }}" {% if result and result.library == lib %}selected{% endif %}>{{ lib }}</option>
-      {% endfor %}
+<div class="card">
+  <form method="post" style="display:flex; gap:.6rem; align-items:center; flex-wrap:wrap;">
+    <select name="library" required style="flex:1; min-width:240px; padding:.5rem .6rem; border-radius:6px; border:1px solid var(--line);">
+      <option value="">Choose a library…</option>
+      {% for lib in libraries %}<option value="{{ lib }}" {{ 'selected' if result and result.library==lib }}>{{ lib }}</option>{% endfor %}
     </select>
-    <button type="submit">Simulate zero-day</button>
+    <button class="btn" type="submit">Simulate zero-day</button>
   </form>
+</div>
 
-  {% if result %}
-  <div class="result-banner">
-    <div class="headline">&#9889; {{ result.library }} zero-day would expose {{ result.app_count }} application(s)</div>
-    Blast radius score: {{ result.blast_score }} (weighted by application criticality)
-  </div>
+{% if result %}
+<div class="card" style="margin-top:1rem;">
+  <h2>⚡ {{ result.library }} would expose {{ result.app_count }} application(s)</h2>
+  <p class="sub">Blast-radius score <b>{{ result.blast_score }}</b> (Σ criticality weights of affected apps).</p>
+  <div class="tablewrap">
   <table>
-    <tr><th>Application</th><th>Criticality</th><th>Department</th><th>Deployment</th><th>Versions in use</th></tr>
-    {% for a in result.affected_apps %}
-    <tr>
-      <td>{{ a.name }}</td>
-      <td><span class="badge {{ a.criticality }}">{{ a.criticality }}</span></td>
-      <td>{{ a.department }}</td>
-      <td>{{ a.deployment }}</td>
-      <td>{{ a.versions|join(', ') }}</td>
-    </tr>
-    {% endfor %}
+    <thead><tr><th>Application</th><th>Criticality</th><th>Department</th><th>Deployment</th><th>Versions</th><th>Currently flagged?</th></tr></thead>
+    <tbody>
+      {% for a in result.affected_apps %}
+      <tr>
+        <td><b>{{ a.name }}</b></td>
+        <td><span class="badge sev-{{ a.criticality }}">{{ a.criticality }}</span></td>
+        <td>{{ a.department or '—' }}</td>
+        <td>{{ a.deployment or '—' }}</td>
+        <td class="mono">{{ a.versions|join(', ') }}</td>
+        <td>{% if a.flagged %}<span class="pill-bad">yes</span>{% else %}<span class="pill-ok">no</span>{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
   </table>
-  {% endif %}
-</body>
-</html>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
