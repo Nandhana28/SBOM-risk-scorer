@@ -1,3 +1,7 @@
+"""Self-evaluation of the LEGACY ML variant (detector.py) — not the shipped engine.
+For the deterministic engine's accuracy, see the in-app /validation page or
+`python -m sbom.metrics`.
+"""
 import pandas as pd
 from sklearn.metrics import precision_score, recall_score, f1_score
 from detector import analyze, DATA_DIR, RISK_MODEL_THRESHOLD
