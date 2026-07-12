@@ -1,6 +1,6 @@
 # Software Supply Chain Risk Scorer (SBOM Analyzer)
 
-PB-10 submission — Option C (Simple SBOM Scanner), built against the real
+PB-10 submission — Option C (Simple SBOM Scanner),
 `sample_data/problem_10/` dataset.
 
 ## Run it
